@@ -12,6 +12,10 @@ public class Till {
     public Till(double cash) {
         this.cash = cash;
     }
+
+    public Till() {
+    }
+
     @Id
     @GeneratedValue
     @Column(name = "id")
