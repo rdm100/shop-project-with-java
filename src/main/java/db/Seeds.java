@@ -68,7 +68,7 @@ public class Seeds {
         DBHelper.save(order);
 
         List<Order> orders = DBCustomer.AllOrdersBelongingToACustomer(customer);
-        List<Product> products = DBOrder.AllProductsBelongingToAOrder(order);
+//        List<Product> products = DBOrder.AllProductsBelongingToAOrder(order);
    }
 
 

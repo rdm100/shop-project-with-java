@@ -30,7 +30,7 @@ public class Order {
         this.id = id;
     }
 
-    @ElementCollection
+    @ElementCollection(fetch=FetchType.EAGER)
     @CollectionTable()
     public List<Product> getBoughtProducts() {
         return boughtProducts;
@@ -40,7 +40,8 @@ public class Order {
         this.boughtProducts = boughtProducts;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.PERSIST)
+    @JoinColumn(name ="customer_id")
     public Customer getCustomer() {
         return customer;
     }

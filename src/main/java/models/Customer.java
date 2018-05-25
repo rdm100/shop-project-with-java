@@ -14,6 +14,7 @@ public class Customer {
     private double wallet;
     private List<Product> products;
     private Basket basket;
+    private List<Order> orders;
 
     public Customer() {
     }
@@ -23,6 +24,7 @@ public class Customer {
         this.age = age;
         this.wallet = wallet;
         this.products = new ArrayList<Product>();
+        this.orders = new ArrayList<>();
     }
 
     @Id
@@ -99,5 +101,14 @@ public class Customer {
 
     public void setBasket(Basket basket) {
         this.basket = basket;
+    }
+
+    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 }
