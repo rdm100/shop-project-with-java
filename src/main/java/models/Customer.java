@@ -13,6 +13,7 @@ public class Customer {
     private int age;
     private double wallet;
     private List<Product> products;
+    private Basket basket;
 
     public Customer() {
     }
@@ -53,7 +54,7 @@ public class Customer {
         this.age = age;
     }
 
-    @Column
+    @Transient
     public double getWallet() {
         return wallet;
     }
@@ -62,8 +63,7 @@ public class Customer {
         this.wallet = wallet;
     }
 
-    @OneToOne()
-    @PrimaryKeyJoinColumn
+    @Transient
     public List<Product> getProducts() {
         return products;
     }
@@ -91,5 +91,13 @@ public class Customer {
             setWallet(getWallet() - basket.calculateTotalCostOfAllItemsInBasket());
             return  total;
         } return 0;
+    }
+    @OneToOne(mappedBy = "customer", fetch = FetchType.LAZY)
+    public Basket getBasket() {
+        return basket;
+    }
+
+    public void setBasket(Basket basket) {
+        this.basket = basket;
     }
 }

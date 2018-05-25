@@ -27,7 +27,7 @@ public class Stock {
         this.id = id;
     }
 
-
+    @OneToMany(mappedBy = "stock")
     public List<Product> getStoreStockList() {
         return storeStockList;
     }

@@ -9,6 +9,7 @@ public abstract class Product {
     private String name;
     private double price;
     private Basket basket;
+    private Stock stock;
 
     public Product() {
     }
@@ -57,5 +58,15 @@ public abstract class Product {
 
     public void setBasket(Basket basket) {
         this.basket = basket;
+    }
+
+    @ManyToOne(cascade=CascadeType.PERSIST)
+    @JoinColumn(name ="stock_id")
+    public Stock getStock() {
+        return stock;
+    }
+
+    public void setStock(Stock stock) {
+        this.stock = stock;
     }
 }

@@ -40,7 +40,7 @@ public class Basket {
         this.basket = products;
     }
 
-    @OneToOne(mappedBy = "customer", fetch = FetchType.LAZY)
+    @OneToOne
     public Customer getCustomer() {
         return customer;
     }

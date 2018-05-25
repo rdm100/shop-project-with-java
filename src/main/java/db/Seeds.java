@@ -9,18 +9,17 @@ import java.util.Calendar;
 
 public class Seeds {
     public static void seedData() {
-//        DBHelper.deleteAll(Customer.class);
-//        DBHelper.deleteAll(Product.class);
-//        DBHelper.deleteAll(Till.class);
-//        DBHelper.deleteAll(Stock.class);
+        DBHelper.deleteAll(Customer.class);
+        DBHelper.deleteAll(Product.class);
+        DBHelper.deleteAll(Till.class);
+        DBHelper.deleteAll(Stock.class);
 
 
 
 
         Customer customer = new Customer("Paul", 33, 100);
         Customer customer2 = new Customer("Roberto", 39, 20);
-        DBHelper.save(customer);
-        DBHelper.save(customer2);
+
 
         Calendar bestBefore = Calendar.getInstance();
         bestBefore.set(Calendar.YEAR, 2018);
@@ -32,22 +31,33 @@ public class Seeds {
         Product clothing = new Clothing ("Levis", 100, "M", "Black", "Mens");
         Product electrical = new Electrical("Laptop", 1000, "Dell XPS", "Silver");
         Product food = new Food("Bread", 100, bestBefore, "Scotland", 100);
+
+
+        Stock stock = new Stock();
+
+
+        Till till = new Till(100);
+
+
+        Basket basket = new Basket(customer);
+        Basket basket2 = new Basket(customer2);
+
+        customer.setBasket(basket);
+        customer2.setBasket(basket2);
+
+
         DBHelper.save(drink);
         DBHelper.save(drink2);
         DBHelper.save(clothing);
         DBHelper.save(electrical);
         DBHelper.save(food);
-
-        Stock stock = new Stock();
         DBHelper.save(stock);
-
-        Till till = new Till(100);
         DBHelper.save(till);
 
-        Basket basket = new Basket(customer);
+        DBHelper.save(customer);
+        DBHelper.save(customer2);
         DBHelper.save(basket);
-
-
+        DBHelper.save(basket2);
     }
 
 
