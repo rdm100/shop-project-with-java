@@ -14,8 +14,8 @@ public class Electrical extends Product {
     public Electrical() {
     }
 
-    public Electrical(String name, double price, int quantity, String model, String colour) {
-        super(name, price, quantity);
+    public Electrical(String name, double price,  String model, String colour) {
+        super(name, price);
         this.model = model;
         this.colour = colour;
     }

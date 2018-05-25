@@ -8,16 +8,15 @@ public abstract class Product {
     private int id;
     private String name;
     private double price;
-    private int quantity;
     private Basket basket;
 
     public Product() {
     }
 
-    public Product(String name, double price, int quantity) {
+    public Product(String name, double price) {
         this.name = name;
         this.price = price;
-        this.quantity = quantity;
+
     }
 
     @Id
@@ -49,14 +48,7 @@ public abstract class Product {
         this.price = price;
     }
 
-    @Column
-    public int getQuantity() {
-        return quantity;
-    }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
 
 
     @ManyToOne(cascade=CascadeType.PERSIST)

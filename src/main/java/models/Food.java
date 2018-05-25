@@ -15,8 +15,8 @@ public class Food extends Product {
     }
 
 
-    public Food(String name, double price, int quantity, Calendar bestBefore, String origin, int calories) {
-        super(name, price, quantity);
+    public Food(String name, double price,  Calendar bestBefore, String origin, int calories) {
+        super(name, price);
         this.bestBefore = bestBefore;
         this.origin = origin;
         this.calories = calories;

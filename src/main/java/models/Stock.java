@@ -2,6 +2,7 @@ package models;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -10,7 +11,9 @@ public class Stock {
     private int id;
     private List<Product> storeStockList;
 
+
     public Stock() {
+        this.storeStockList = new ArrayList<>();
 
     }
 

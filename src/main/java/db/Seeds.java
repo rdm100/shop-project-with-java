@@ -14,8 +14,8 @@ public class Seeds {
         DBHelper.save(customer);
         DBHelper.save(customer2);
 
-        Product product = new Drink("Coke", 0.50, 4, 330, 4.5, 0, 20 );
-        Product product2 = new Drink("Pepsi", 0.65, 4, 330, 4.5, 0, 20 );
+//        Product product = new Drink("Coke", 0.50, 4, 330, 4.5, 0, 20 );
+//        Product product2 = new Drink("Pepsi", 0.65, 4, 330, 4.5, 0, 20 );
 
 
     }
