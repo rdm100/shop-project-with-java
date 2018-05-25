@@ -30,10 +30,8 @@
 .idea/**/sqlDataSources.xml
 .idea/**/dynamic.xml
 .idea/**/uiDesigner.xml
-.idea/vcs.xml
-.idea/compiler.xml
 hibernate.cfg.xml
-
+.idea
 
 
 # IntelliJ
