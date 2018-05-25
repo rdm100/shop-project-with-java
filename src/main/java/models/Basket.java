@@ -12,6 +12,8 @@ public class Basket {
     private Customer customer;
 
 
+    public Basket() {
+    }
 
     public Basket(Customer customer) {
         this.basket = new ArrayList<>();

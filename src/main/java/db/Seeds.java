@@ -1,16 +1,18 @@
 package db;
 
 
+import db.DBHelper;
 import models.*;
+
 
 import java.util.Calendar;
 
 public class Seeds {
     public static void seedData() {
-        DBHelper.deleteAll(Customer.class);
-        DBHelper.deleteAll(Product.class);
-        DBHelper.deleteAll(Till.class);
-        DBHelper.deleteAll(Stock.class);
+//        DBHelper.deleteAll(Customer.class);
+//        DBHelper.deleteAll(Product.class);
+//        DBHelper.deleteAll(Till.class);
+//        DBHelper.deleteAll(Stock.class);
 
 
 
@@ -37,8 +39,13 @@ public class Seeds {
         DBHelper.save(food);
 
         Stock stock = new Stock();
-        Till till = new Till(100);
+        DBHelper.save(stock);
 
+        Till till = new Till(100);
+        DBHelper.save(till);
+
+        Basket basket = new Basket(customer);
+        DBHelper.save(basket);
 
 
     }

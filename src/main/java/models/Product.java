@@ -49,8 +49,6 @@ public abstract class Product {
     }
 
 
-
-
     @ManyToOne(cascade=CascadeType.PERSIST)
     @JoinColumn(name ="basket_id")
     public Basket getBasket() {

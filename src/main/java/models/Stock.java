@@ -1,7 +1,6 @@
 package models;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +16,9 @@ public class Stock {
 
     }
 
+    @Id
+    @GeneratedValue
+    @Column(name = "id")
     public int getId() {
         return id;
     }
@@ -24,6 +26,7 @@ public class Stock {
     public void setId(int id) {
         this.id = id;
     }
+
 
     public List<Product> getStoreStockList() {
         return storeStockList;
