@@ -41,9 +41,15 @@ public class Seeds {
 
         Basket basket = new Basket(customer);
         Basket basket2 = new Basket(customer2);
+        basket.addProducttoBasket(food);
 
         customer.setBasket(basket);
         customer2.setBasket(basket2);
+
+        Order order = new Order(basket.basketGivesAllProductsToCustomer(), customer);
+
+
+
 
 
         DBHelper.save(drink);
@@ -58,6 +64,7 @@ public class Seeds {
         DBHelper.save(customer2);
         DBHelper.save(basket);
         DBHelper.save(basket2);
+        DBHelper.save(order);
     }
 
 

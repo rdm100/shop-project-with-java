@@ -22,6 +22,7 @@
         <mapping class = "models.Drink"/>
         <mapping class = "models.Electrical"/>
         <mapping class = "models.Food"/>
+        <mapping class = "models.Order"/>
 
     </session-factory>
 </hibernate-configuration>

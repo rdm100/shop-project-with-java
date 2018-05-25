@@ -92,7 +92,7 @@ public class Customer {
             return  total;
         } return 0;
     }
-    @OneToOne(mappedBy = "customer", fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "customer", fetch = FetchType.LAZY, cascade=CascadeType.ALL)
     public Basket getBasket() {
         return basket;
     }

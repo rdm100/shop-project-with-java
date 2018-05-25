@@ -60,7 +60,10 @@ public class Basket {
     public List<Product> basketGivesAllProductsToCustomer(){
         ArrayList<Product> customerProducts = new ArrayList<>();
         customerProducts.addAll(basket);
+        basket.clear();
+
          return customerProducts;
+
     }
 
     public double calculateTotalCostOfAllItemsInBasket(){
@@ -68,5 +71,10 @@ public class Basket {
         for(Product product: basket){
             result += product.getPrice();
         } return result;
+    }
+
+    public void updateCustomerOrderFromBasket(Order order){
+        order.addBasketProductsToOrder(basketGivesAllProductsToCustomer());
+        order.setCustomer(this.customer);
     }
 }
