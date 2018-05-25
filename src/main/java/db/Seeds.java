@@ -6,6 +6,7 @@ import models.*;
 
 
 import java.util.Calendar;
+import java.util.List;
 
 public class Seeds {
     public static void seedData() {
@@ -65,7 +66,10 @@ public class Seeds {
         DBHelper.save(basket);
         DBHelper.save(basket2);
         DBHelper.save(order);
-    }
+
+        List<Order> orders = DBCustomer.AllOrdersBelongingToACustomer(customer);
+        List<Product> products = DBOrder.AllProductsBelongingToAOrder(order);
+   }
 
 
 
