@@ -79,4 +79,17 @@ public class Customer {
     public void addBasketToCustomerProducts(List<Product> products){
         this.products.addAll(products);
     }
+    public boolean customerCanAffordShopping(Basket basket){
+    if(getWallet() > basket.calculateTotalCostOfAllItemsInBasket())
+    {return true;}
+    return false;
+    }
+
+    public double customerPaysForBasket(Basket basket){
+        double total = basket.calculateTotalCostOfAllItemsInBasket();
+        if(customerCanAffordShopping(basket)){
+            setWallet(getWallet() - basket.calculateTotalCostOfAllItemsInBasket());
+            return  total;
+        } return 0;
+    }
 }

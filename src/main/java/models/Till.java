@@ -1,6 +1,8 @@
 package models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "till")
@@ -34,5 +36,17 @@ public class Till {
 
     public void setCash(double cash) {
         this.cash = cash;
+    }
+
+    public void addMoneyToTill(double money){
+        this.cash += money;
+    }
+
+    public void sellBasketToCustomer(Customer customer, Basket basket){
+        if(customer.customerCanAffordShopping(basket)){
+        double total = customer.customerPaysForBasket(basket);
+        this.addMoneyToTill(total);
+        List<Product> products =  basket.basketGivesAllProductsToCustomer();
+        customer.addBasketToCustomerProducts(products);}
     }
 }
