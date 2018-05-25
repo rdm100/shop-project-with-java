@@ -1,8 +1,10 @@
 package models;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Table;
 
+@Entity
 @Table(name = "drinks")
 public class Drink extends Product {
     private int volume;

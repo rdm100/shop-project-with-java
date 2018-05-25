@@ -2,14 +2,14 @@ package models;
 
 import javax.persistence.*;
 
-
+@Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Product {
     private int id;
     private String name;
     private double price;
     private int quantity;
-    private Customer customer;
+    private Basket basket;
 
     public Product() {
     }
@@ -58,13 +58,14 @@ public abstract class Product {
         this.quantity = quantity;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "customer_id")
-    public Customer getCustomer() {
-        return customer;
+
+    @ManyToOne(cascade=CascadeType.PERSIST)
+    @JoinColumn(name ="basket_id")
+    public Basket getBasket() {
+        return basket;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setBasket(Basket basket) {
+        this.basket = basket;
     }
 }

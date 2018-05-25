@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 @Table(name = "customers")
 public class Customer {
 
@@ -61,7 +62,8 @@ public class Customer {
         this.wallet = wallet;
     }
 
-    @OneToMany(mappedBy = "product")
+    @OneToOne()
+    @PrimaryKeyJoinColumn
     public List<Product> getProducts() {
         return products;
     }

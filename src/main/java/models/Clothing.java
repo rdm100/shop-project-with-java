@@ -1,8 +1,10 @@
 package models;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Table;
 
+@Entity
 @Table(name = "clothes")
 public class Clothing extends Product {
     private String size;

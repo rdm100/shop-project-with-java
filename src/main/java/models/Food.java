@@ -3,6 +3,7 @@ package models;
 import javax.persistence.*;
 import java.util.Calendar;
 
+@Entity
 @Table(name = "foods")
 public class Food extends Product {
 
