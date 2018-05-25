@@ -60,4 +60,11 @@ public class Basket {
         customerProducts.addAll(basket);
          return customerProducts;
     }
+
+    public double calculateTotalCostOfAllItemsInBasket(){
+        double result = 0;
+        for(Product product: basket){
+            result += product.getPrice();
+        } return result;
+    }
 }
