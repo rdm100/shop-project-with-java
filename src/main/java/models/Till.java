@@ -31,6 +31,7 @@ public class Till {
         return cash;
     }
 
+
     public void setCash(double cash) {
         this.cash = cash;
     }
