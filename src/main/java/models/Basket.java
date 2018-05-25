@@ -8,13 +8,13 @@ import java.util.List;
 @Table(name = "baskets")
 public class Basket {
     private int id;
-    private List<Product> products;
+    private List<Product> basket;
     private Customer customer;
 
 
 
     public Basket(Customer customer) {
-        this.products = new ArrayList<>();
+        this.basket = new ArrayList<>();
         this.customer = customer;
     }
 
@@ -31,11 +31,11 @@ public class Basket {
 
     @OneToMany(mappedBy = "basket")
     public List<Product> getProducts() {
-        return products;
+        return basket;
     }
 
     public void setProducts(List<Product> products) {
-        this.products = products;
+        this.basket = products;
     }
 
     @OneToOne(mappedBy = "customer", fetch = FetchType.LAZY)
@@ -45,5 +45,19 @@ public class Basket {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    public int countProductsInBasket(){
+        return this.basket.size();
+    }
+
+    public void addProducttoBasket(Product product){
+        this.basket.add(product);
+    }
+
+    public List<Product> basketGivesAllProductsToCustomer(){
+        ArrayList<Product> customerProducts = new ArrayList<>();
+        customerProducts.addAll(basket);
+         return customerProducts;
     }
 }

@@ -71,4 +71,12 @@ public class Customer {
     public void setProducts(List<Product> products) {
         this.products = products;
     }
+
+    public int countCustomerHasProducts(){
+        return this.products.size();
+    }
+
+    public void addBasketToCustomerProducts(List<Product> products){
+        this.products.addAll(products);
+    }
 }
