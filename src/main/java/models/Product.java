@@ -81,8 +81,8 @@ public abstract class Product {
 
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(name = "products_in_order",
-            inverseJoinColumns = {@JoinColumn(name = "order_id", nullable = false, updatable = false)},
-            joinColumns = {@JoinColumn(name = "product_id", nullable = false, updatable = false)}
+            joinColumns = {@JoinColumn(name = "product_id")},
+            inverseJoinColumns = {@JoinColumn(name = "order_id")}
     )
     @Fetch(FetchMode.SELECT)
     public List<Order> getOrders() {
@@ -96,5 +96,6 @@ public abstract class Product {
     public void addOrdertoProduct(Order order){
         this.orders.add(order);
         DBHelper.save(this);
+
     }
 }

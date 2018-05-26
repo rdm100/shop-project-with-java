@@ -1,6 +1,8 @@
 package models;
 
 import db.DBHelper;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -35,13 +37,16 @@ public class Order {
     }
 
     @ManyToMany(mappedBy = "orders")
-    public List<Product> getBoughtProducts() {
+    @Fetch(FetchMode.SELECT)
+    public List<Product> getProducts() {
         return boughtProducts;
     }
 
-    public void setBoughtProducts(List<Product> boughtProducts) {
+
+    public void setProducts(List<Product> boughtProducts) {
         this.boughtProducts = boughtProducts;
     }
+
 
     @ManyToOne(cascade=CascadeType.PERSIST)
     @JoinColumn(name ="customer_id")
@@ -67,6 +72,7 @@ public class Order {
             product.addOrdertoProduct(this);
 
         }
+
     }
 
 
