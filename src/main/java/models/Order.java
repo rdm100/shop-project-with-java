@@ -1,5 +1,9 @@
 package models;
 
+import db.DBHelper;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -30,8 +34,7 @@ public class Order {
         this.id = id;
     }
 
-    @ElementCollection(fetch=FetchType.EAGER)
-    @CollectionTable()
+    @ManyToMany(mappedBy = "orders")
     public List<Product> getBoughtProducts() {
         return boughtProducts;
     }
@@ -57,4 +60,14 @@ public class Order {
     public void addBasketProductsToOrder(List<Product> customersBoughtProducts){
         this.boughtProducts.addAll(customersBoughtProducts);
     }
+
+    public void giveProductsToAnOrder(){
+        DBHelper.save(this);
+        for (Product product: this.boughtProducts){
+            product.addOrdertoProduct(this);
+
+        }
+    }
+
+
 }

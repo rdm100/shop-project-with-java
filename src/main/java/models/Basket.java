@@ -1,5 +1,7 @@
 package models;
 
+import db.DBHelper;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +57,9 @@ public class Basket {
 
     public void addProducttoBasket(Product product){
         this.basket.add(product);
+        product.setBasket(this);
+        DBHelper.save(product);
+        DBHelper.save(this);
     }
 
     public List<Product> basketGivesAllProductsToCustomer(){

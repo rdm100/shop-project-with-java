@@ -1,6 +1,12 @@
 package models;
 
+import db.DBHelper;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -10,6 +16,7 @@ public abstract class Product {
     private double price;
     private Basket basket;
     private Stock stock;
+    private List<Order> orders;
 
     public Product() {
     }
@@ -17,6 +24,7 @@ public abstract class Product {
     public Product(String name, double price) {
         this.name = name;
         this.price = price;
+        this.orders = new ArrayList<>();
 
     }
 
@@ -68,5 +76,25 @@ public abstract class Product {
 
     public void setStock(Stock stock) {
         this.stock = stock;
+    }
+
+
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(name = "products_in_order",
+            inverseJoinColumns = {@JoinColumn(name = "order_id", nullable = false, updatable = false)},
+            joinColumns = {@JoinColumn(name = "product_id", nullable = false, updatable = false)}
+    )
+    @Fetch(FetchMode.SELECT)
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
+    public void addOrdertoProduct(Order order){
+        this.orders.add(order);
+        DBHelper.save(this);
     }
 }

@@ -14,6 +14,8 @@ public class Seeds {
         DBHelper.deleteAll(Product.class);
         DBHelper.deleteAll(Till.class);
         DBHelper.deleteAll(Stock.class);
+        DBHelper.deleteAll(Basket.class);
+        DBHelper.deleteAll(Order.class);
 
 
 
@@ -42,12 +44,12 @@ public class Seeds {
 
         Basket basket = new Basket(customer);
         Basket basket2 = new Basket(customer2);
-        basket.addProducttoBasket(food);
+
 
         customer.setBasket(basket);
         customer2.setBasket(basket2);
 
-        Order order = new Order(basket.basketGivesAllProductsToCustomer(), customer);
+
 
 
 
@@ -65,10 +67,19 @@ public class Seeds {
         DBHelper.save(customer2);
         DBHelper.save(basket);
         DBHelper.save(basket2);
+        basket.addProducttoBasket(food);
+        Order order = new Order(basket.basketGivesAllProductsToCustomer(), customer);
+        order.giveProductsToAnOrder();
         DBHelper.save(order);
 
+
+
+
+        Basket foundBasket = DBHelper.find(Basket.class, basket.getId());
+        Order foundOrder = DBHelper.find(Order.class, order.getId());
+
         List<Order> orders = DBCustomer.AllOrdersBelongingToACustomer(customer);
-//        List<Product> products = DBOrder.AllProductsBelongingToAOrder(order);
+        List<Product> productsFromBasket = DBBasket.AllProductsBelongingToAOrder(basket);
    }
 
 
