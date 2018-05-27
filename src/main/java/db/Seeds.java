@@ -61,10 +61,17 @@ public class Seeds {
         DBHelper.save(basket);
         DBHelper.save(basket2);
         basket.addProducttoBasket(food);
+        basket.addProducttoBasket(electrical);
         Order order = new Order(basket.basketGivesAllProductsToCustomer(), customer);
         DBHelper.save(order);
         order.giveProductsToAnOrder();
         DBHelper.save(food);
+        DBHelper.save(electrical);
+
+        stock.addProductToStock(food);
+        DBHelper.save(food);
+        stock.addProductToStock(electrical);
+        DBHelper.save(electrical);
 
 
 
@@ -75,6 +82,8 @@ public class Seeds {
         List<Order> orders = DBCustomer.AllOrdersBelongingToACustomer(customer);
         List<Product> productsFromBasket = DBBasket.AllProductsBelongingToAOrder(basket);
         List<Product> productsFromOrder = DBOrder.findProductsInOrder(order);
+        Stock Findingstock =DBHelper.find(Stock.class, stock.getId() );
+        List<Product> productsFromStock = DBStock.AllProductsBelongingToStock(stock);
     }
 
 }

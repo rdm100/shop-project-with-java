@@ -1,5 +1,7 @@
 package models;
 
+import db.DBHelper;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,5 +44,6 @@ public class Stock {
 
     public void addProductToStock(Product product){
         this.storeStockList.add(product);
+        product.setStock(this);
     }
 }
