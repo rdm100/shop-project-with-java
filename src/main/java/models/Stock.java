@@ -29,7 +29,7 @@ public class Stock {
         this.id = id;
     }
 
-    @OneToMany(mappedBy = "stock")
+    @OneToMany(mappedBy = "stock", fetch = FetchType.EAGER)
     public List<Product> getStoreStockList() {
         return storeStockList;
     }
@@ -44,7 +44,7 @@ public class Stock {
 
     public void addProductToStock(Product product){
         this.storeStockList.add(product);
-//        product.setStock(this);
+        product.setStock(this);
     }
 
     public void removeProductFromStock(Product product){

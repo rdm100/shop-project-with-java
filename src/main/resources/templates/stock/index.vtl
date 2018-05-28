@@ -6,6 +6,7 @@
             <th>Id</th>
             <th>Name</th>
             <th>Price</th>
+            <th>Quantity</th>
             <th></th>
 
         </tr>
@@ -14,11 +15,13 @@
             <td>$product.getId()</td>
             <td>$product.getName()</td>
             <td>$product.getPrice()</td>
+            <td>$stock.getQuantityOfProduct(product)</td>
             <td><a href="/$product.productType()/$product.getId()/edit" class="button center">Edit</a></td>
 
 
         <tr>
             #end
+
     </table>
 
 </div>

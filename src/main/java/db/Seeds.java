@@ -5,6 +5,7 @@ import db.DBHelper;
 import models.*;
 
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -32,9 +33,9 @@ public class Seeds {
         Product clothing = new Clothing("Levis", 100, "M", "Black", "Mens");
         Product electrical = new Electrical("Laptop", 1000, "Dell XPS", "Silver");
         Product food = new Food("Bread", 100, bestBefore, "Scotland", 100);
-
-
         Stock stock = new Stock();
+        DBHelper.save(stock);
+
 
 
         Till till = new Till(100);
@@ -53,7 +54,7 @@ public class Seeds {
         DBHelper.save(clothing);
         DBHelper.save(electrical);
         DBHelper.save(food);
-        DBHelper.save(stock);
+
         DBHelper.save(till);
 
         DBHelper.save(customer);
@@ -72,6 +73,7 @@ public class Seeds {
         DBHelper.save(food);
         stock.addProductToStock(electrical);
         DBHelper.save(electrical);
+        DBHelper.save(stock);
 
 
 
