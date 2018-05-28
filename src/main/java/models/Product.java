@@ -100,14 +100,14 @@ public abstract class Product {
 
     }
 
-    public static String productType(Product product){
-        if(product instanceof Food){
+    public String productType(){
+        if(this instanceof Food){
             return "food"; }
-        if(product instanceof Electrical){
+        if(this instanceof Electrical){
             return "electronics";
-        } if(product instanceof Clothing){
+        } if(this instanceof Clothing){
             return "clothes";
-        } if(product instanceof Drink){
+        } if(this instanceof Drink){
             return "drinks";
         }return null;
     }

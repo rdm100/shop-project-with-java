@@ -28,6 +28,6 @@ public class ProductTest {
 
     @Test
     public void getProductTypeString() {
-        assertEquals("food", Product.productType(food));
+        assertEquals("food", food.productType());
     }
 }

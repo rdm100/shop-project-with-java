@@ -7,6 +7,7 @@ import models.Product;
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
 
+import java.text.NumberFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,6 +37,8 @@ public class DrinksController {
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
+
+
         get("/drinks", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             String loggedInUser = LoginController.getLoggedInUserName(req, res);
@@ -62,17 +65,39 @@ public class DrinksController {
         return new ModelAndView(model, "templates/layout.vtl");
     }, new VelocityTemplateEngine());
 
-//        post ("/departments/:id", (req, res) -> {
-//            String strId = req.params(":id");
-//            Integer intId = Integer.parseInt(strId);
-//            Depart department = DBHelper.find(intId, Department.class);
-//            String title = req.queryParams("title");
-//            department.setTitle(title);
-//            DBHelper.update(department);
-//            res.redirect("/departments");
-//            return null;
-//
-//        }, new VelocityTemplateEngine());
-}}
+    post ("/drinks/:id", (req, res) ->{
+        String strId = req.params(":id");
+        Integer intId = Integer.parseInt(strId);
+        Drink drink = DBHelper.find(Drink.class, intId);
+        String name = req.queryParams("name");
+        double price = Double.parseDouble(req.queryParams("price"));
+        int volume = Integer.parseInt(req.queryParams("volume"));
+        double sugarContent = Double.parseDouble(req.queryParams("sugarContent"));
+        double alcholContent = Double.parseDouble(req.queryParams("alcoholContent"));
+        int caffeineContent = Integer.parseInt(req.queryParams("caffeineContent"));
+        drink.setName(name);
+        drink.setPrice(price);
+        drink.setVolume(volume);
+        drink.setAlcholContent(alcholContent);
+        drink.setSugarContent(sugarContent);
+        drink.setCaffineContent(caffeineContent);
+        DBHelper.save(drink);
+        res.redirect("/stock");
+        return null;
+
+
+        },new VelocityTemplateEngine());
+
+        post ("/drinks/:id/delete", (req, res) -> {
+            int id = Integer.parseInt(req.params(":id"));
+            Drink drink = DBHelper.find(Drink.class, id);
+            DBHelper.delete(drink);
+            res.redirect("/drinks");
+            return null;
+        }, new VelocityTemplateEngine());
+
+    }
+}
+
 
 

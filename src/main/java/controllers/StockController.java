@@ -32,7 +32,6 @@ public class StockController {
             String loggedInUser = LoginController.getLoggedInUserName(req, res);
             List<Product> products = DBHelper.getAll(Product.class);
             model.put("products", products);
-            model.put("Product", Product.class);
             model.put("user", loggedInUser);
             model.put("template", "templates/stock/index.vtl");
             return new ModelAndView(model, "templates/layout.vtl");

@@ -11,6 +11,7 @@
             <th>Alcohol Content</th>
             <th>Caffeine Content</th>
             <th></th>
+            <th></th>
         </tr>
 
         <tr>
@@ -18,10 +19,17 @@
             <td>$drink.getPrice()</td>
             <td>$drink.getVolume()</td>
             <td>$drink.getSugarContent()</td>
-            <td>$drink.getAlcoholContent()</td>
-            <td>$drink.getCaffeineContent()</td>
+            <td>$drink.getAlcholContent()</td>
+            <td>$drink.getCaffineContent()</td>
             <td><a href = "/drinks/$drink.getId()/edit" class = "button center">Edit</a></td>
+            <td>  <form action="/drinks/$drink.getId()/delete" method="post">
+                <input type="submit" value="Delete" class="button center">
+            </form>  </td>
         <tr>
 
     </table>
+
+    <form action="/drinks/$engineer.getId()/delete" method="post">
+        <input type="submit" value="Delete" class="button center">
+    </form>
 </div>
