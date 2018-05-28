@@ -9,6 +9,7 @@ import java.util.List;
 public class Customer {
 
     private int id;
+    private String userName;
     private String name;
     private int age;
     private double wallet;
@@ -19,7 +20,8 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(String name, int age, double wallet) {
+    public Customer(String userName, String name, int age, double wallet) {
+        this.userName = userName;
         this.name = name;
         this.age = age;
         this.wallet = wallet;
@@ -36,6 +38,15 @@ public class Customer {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Column(name = "user_name")
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     @Column

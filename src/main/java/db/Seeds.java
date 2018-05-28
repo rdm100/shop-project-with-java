@@ -18,8 +18,8 @@ public class Seeds {
         DBHelper.deleteAll(Order.class);
 
 
-        Customer customer = new Customer("Paul", 33, 100);
-        Customer customer2 = new Customer("Roberto", 39, 20);
+        Customer customer = new Customer("paulkelly20", "Paul", 33, 100);
+        Customer customer2 = new Customer("rdm", "Roberto", 39, 20);
 
 
         Calendar bestBefore = Calendar.getInstance();

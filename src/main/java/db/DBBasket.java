@@ -14,7 +14,8 @@ public class DBBasket {
 
     private static Session session;
 
-    public static List<Product> AllProductsBelongingToAOrder(Basket basket) {
+
+    public static List<Product> AllProductsInABasket(Basket basket) {
         session = HibernateUtil.getSessionFactory().openSession();
         List<Product> products = null;
         try {
