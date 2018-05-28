@@ -1,6 +1,7 @@
 package models;
 
 import db.DBHelper;
+import javassist.expr.Instanceof;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -97,5 +98,17 @@ public abstract class Product {
         this.orders.add(order);
         DBHelper.save(this);
 
+    }
+
+    public static String productType(Product product){
+        if(product instanceof Food){
+            return "food"; }
+        if(product instanceof Electrical){
+            return "electronics";
+        } if(product instanceof Clothing){
+            return "clothes";
+        } if(product instanceof Drink){
+            return "drinks";
+        }return null;
     }
 }

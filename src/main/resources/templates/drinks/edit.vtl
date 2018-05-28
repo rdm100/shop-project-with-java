@@ -1,0 +1,24 @@
+<p class="pageHeader">Edit Stock</p>
+
+<form action="/drinks/$drink.getId()" method="post">
+    <label for="name">Name:</label>
+    <input id = "name" class="inputbox" type="text" name="name" required="true" value="$drink.getName()">
+
+    <label for="price">Price:</label>
+    <input id = "price" class="inputbox" type="text" name="price" required="true" value="$drink.getPrice()">
+
+    <label for="volume">Volume:</label>
+    <input id = "volume" type="number" name="volume" required="true" class="inputbox" value="$drink.getVolume()">
+
+    <label for="sugarContent">Sugar Content:</label>
+    <input id = "sugarContent" type="number" name="SugarContent" required="true" class="inputbox" value="$drink.getSugarContent()">
+
+    <label for="alcoholContent">Alcohol Content:</label>
+    <input id = "alcoholContent"type="number" name="alcoholContent" required="true" class="inputbox" value="$drink.getAlcoholContent()">
+
+    <label for="caffeineContent">Caffeine Content:</label>
+    <input id = "caffeineContent" type="number" name="caffeineContent" required="true" class="inputbox" value="$drink.getCaffeineContent()">
+
+    <input type="submit" value="Save" class="button">
+</form>
+<a href="/drinks/$drinks.getId()" class="button center">Cancel</a>

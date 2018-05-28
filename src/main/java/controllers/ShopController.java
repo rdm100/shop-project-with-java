@@ -17,6 +17,8 @@ public class ShopController {
         DrinksController drinksController = new DrinksController();
         ElectronicsController electronicsController = new ElectronicsController();
         FoodController foodController = new FoodController();
+        StockController stockController = new StockController();
+
         VelocityTemplateEngine velocityTemplateEngine = new VelocityTemplateEngine();
         get("/shop", (req, res) -> {
             HashMap<String, Object> model = new HashMap<>();

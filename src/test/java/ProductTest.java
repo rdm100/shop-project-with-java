@@ -25,4 +25,9 @@ public class ProductTest {
     public void name() {
         assertEquals("16-11-2018", food.bestBeforeToString());
     }
+
+    @Test
+    public void getProductTypeString() {
+        assertEquals("food", Product.productType(food));
+    }
 }

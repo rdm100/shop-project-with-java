@@ -9,6 +9,7 @@
             <th>Sugar Content</th>
             <th>Alcohol Content</th>
             <th>Caffeine Content</th>
+            <th></th>
         </tr>
         #foreach($drink in $drinks)
         <tr>
@@ -18,6 +19,7 @@
             <td>$drink.getSugarContent()</td>
             <td>$drink.getAlcholContent()</td>
             <td>$drink.getCaffineContent()</td>
+            <td><a href = "/drinks/$drink.getId()" class = "button center">Show</a></td>
         <tr>
             #end
     </table>
