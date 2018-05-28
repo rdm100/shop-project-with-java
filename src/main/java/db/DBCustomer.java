@@ -30,18 +30,18 @@ public class DBCustomer {
         return orders;
     }
 
-    public static Customer findCustomer(String username) {
+    public static Customer findCustomerByUsername(String username) {
         session = HibernateUtil.getSessionFactory().openSession();
-        Customer result = null;
+        Customer foundCustomer = null;
         try {
             Criteria cr = session.createCriteria(Customer.class);
             cr.add(Restrictions.eq("username", username));
-            result = (Customer)cr.uniqueResult();
+            foundCustomer = (Customer)cr.uniqueResult();
         } catch (HibernateException e) {
             e.printStackTrace();
         } finally {
             session.close();
         }
-        return result;
+        return foundCustomer;
     }
 }

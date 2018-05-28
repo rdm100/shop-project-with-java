@@ -14,7 +14,7 @@ public class CustomerTest {
 
     @Before
     public void setUp() throws Exception {
-        customer = new Customer("Roberto", 39, 10000);
+        customer = new Customer("rdm", "Roberto", 39, 10000);
         basket = new Basket(customer);
         drink1 = new Drink("Coke", 0.50, 330, 50.0, 0.05 , 40);
         drink2 = new Drink("Pespi", 0.50, 330, 50.0, 0.05 , 40);

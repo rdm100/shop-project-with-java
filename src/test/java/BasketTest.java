@@ -18,7 +18,7 @@ public class BasketTest {
         stock = new Stock();
         stock.addProductToStock(drink1);
         stock.addProductToStock(drink2);
-        customer = new Customer("Roberto", 39, 10000);
+        customer = new Customer("rdm", "Roberto", 39, 10000);
         basket = new Basket(customer);
         drink1 = new Drink("Coke", 0.50, 330, 50.0, 0.05 , 40);
         drink2 = new Drink("Pespi", 0.50, 330, 50.0, 0.05 , 40);

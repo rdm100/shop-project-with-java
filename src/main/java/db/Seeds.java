@@ -80,10 +80,11 @@ public class Seeds {
         Product foundProduct = DBHelper.find(Product.class, food.getId());
 
         List<Order> orders = DBCustomer.AllOrdersBelongingToACustomer(customer);
-        List<Product> productsFromBasket = DBBasket.AllProductsBelongingToAOrder(basket);
+        List<Product> productsFromBasket = DBBasket.AllProductsInABasket(basket);
         List<Product> productsFromOrder = DBOrder.findProductsInOrder(order);
         Stock Findingstock =DBHelper.find(Stock.class, stock.getId() );
         List<Product> productsFromStock = DBStock.AllProductsBelongingToStock(stock);
+        Customer foundCustomerByUserName = DBCustomer.findCustomerByUsername("rdm");
     }
 
 }

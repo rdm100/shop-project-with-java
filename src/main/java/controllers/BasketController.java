@@ -26,7 +26,7 @@ public class BasketController {
             Map<String, Object> model = new HashMap<>();
             String loggedInUser = LoginController.getLoggedInUserName(req, res);
             model.put("user", loggedInUser);
-            Customer customer = DBCustomer.findCustomer(loggedInUser);
+            Customer customer = DBCustomer.findCustomerByUsername(loggedInUser);
             List<Product> products = DBBasket.AllProductsInABasket(customer.getBasket());
             model.put("products", products);
             model.put("template", "templates/clothes/index.vtl");
