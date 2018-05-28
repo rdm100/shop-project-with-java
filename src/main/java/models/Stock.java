@@ -1,20 +1,20 @@
 package models;
 
+import db.DBHelper;
+
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Entity
 @Table(name = "stock")
 public class Stock {
     private int id;
-    private Map<Product, Integer> storeStockList;
+    private List<Product> storeStockList;
 
 
     public Stock() {
-        this.storeStockList = new HashMap<>();
+        this.storeStockList = new ArrayList<>();
 
     }
 
@@ -29,30 +29,38 @@ public class Stock {
         this.id = id;
     }
 
-    @ElementCollection
-    @MapKeyJoinColumn(name = "product_id")
-    @Column(name = "stock_of_product")
-    public Map<Product, Integer> getStoreStockList() {
+    @OneToMany(mappedBy = "stock")
+    public List<Product> getStoreStockList() {
         return storeStockList;
     }
 
-    public void setStoreStockList(Map<Product, Integer> storeStockList) {
+    public void setStoreStockList(List<Product> storeStockList) {
         this.storeStockList = storeStockList;
     }
-
 
     public int stockListCount(){
         return this.storeStockList.size();
     }
 
     public void addProductToStock(Product product){
-        if(storeStockList.containsKey(product)){
-            int value = storeStockList.get(product);
-
-            storeStockList.put(product, value += 1);
-        }
-        else this.storeStockList.put(product, 1);
+        this.storeStockList.add(product);
+        product.setStock(this);
     }
 
+    public void removeProductFromStock(Product product){
+        this.storeStockList.remove(product);
+    }
 
+    public int getQuantityOfProduct(Product productToSearch){
+        int quantity = 0;
+        for(Product product: this.storeStockList ){
+            if(product == productToSearch){
+                quantity += 1;
+            }
+        } return quantity;
+    }
+
+    public void addMulitpleThingsToStock(List<Product> products){
+        this.storeStockList.addAll(products);
+    }
 }

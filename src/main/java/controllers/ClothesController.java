@@ -21,8 +21,8 @@ public class ClothesController {
 
         get("/clothes", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-//            String loggedInUser = LoginController.getLoggedInUserName(req, res);
-//            model.put("user", loggedInUser);
+            String loggedInUser = LoginController.getLoggedInUserName(req, res);
+            model.put("user", loggedInUser);
             List<Clothing> clothes = DBHelper.getAll(Clothing.class);
             model.put("clothes", clothes);
             model.put("template", "templates/clothes/index.vtl");

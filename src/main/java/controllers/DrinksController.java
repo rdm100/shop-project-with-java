@@ -22,8 +22,8 @@ public class DrinksController {
 
         get("/drinks", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-//            String loggedInUser = LoginController.getLoggedInUserName(req, res);
-//            model.put("user", loggedInUser);
+            String loggedInUser = LoginController.getLoggedInUserName(req, res);
+            model.put("user", loggedInUser);
             List<Drink> drinks = DBHelper.getAll(Drink.class);
             model.put("drinks", drinks);
             model.put("template","templates/drinks/index.vtl");

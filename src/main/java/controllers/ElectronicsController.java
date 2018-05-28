@@ -24,8 +24,8 @@ public class ElectronicsController {
 
         get("/electronics", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-//            String loggedInUser = LoginController.getLoggedInUserName(req, res);
-//            model.put("user", loggedInUser);
+            String loggedInUser = LoginController.getLoggedInUserName(req, res);
+            model.put("user", loggedInUser);
             List<Electrical> electronics = DBHelper.getAll(Electrical.class);
             model.put("electronics", electronics);
             model.put("template","templates/electronics/index.vtl");

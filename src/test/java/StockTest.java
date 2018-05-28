@@ -32,7 +32,7 @@ public class StockTest {
         stock.addProductToStock(drink);
         stock.addProductToStock(drink);
         stock.addProductToStock(drink2);
-        assertEquals(2, stock.(drink));
+        assertEquals(2, stock.getQuantityOfProduct(drink));
     }
 
     @Test

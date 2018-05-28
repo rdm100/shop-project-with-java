@@ -23,8 +23,8 @@ public class FoodController {
 
         get("/foods", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-//            String loggedInUser = LoginController.getLoggedInUserName(req, res);
-//            model.put("user", loggedInUser);
+            String loggedInUser = LoginController.getLoggedInUserName(req, res);
+            model.put("user", loggedInUser);
             List<Food> foods = DBHelper.getAll(Food.class);
             model.put("foods", foods);
             model.put("template","templates/foods/index.vtl");
