@@ -1,0 +1,22 @@
+<p class="pageHeader">All Clothes</p>
+
+<div class="container">
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Size</th>
+            <th>Colour</th>
+            <th>Range</th>
+        </tr>
+        #foreach($clothes in $clothes)
+        <tr>
+            <td>$clothes.getName()</td>
+            <td>$clothes.getPrice()</td>
+            <td>$clothes.getSize()</td>
+            <td>$clothes.getColour()</td>
+            <td>$clothes.getRange()</td>
+        <tr>
+            #end
+    </table>
+</div>

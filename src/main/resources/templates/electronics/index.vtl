@@ -1,0 +1,20 @@
+<p class="pageHeader">All Electronics</p>
+
+<div class="container">
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Model</th>
+            <th>Colour</th>
+        </tr>
+        #foreach($electrical in $electronics)
+        <tr>
+            <td>$electrical.getName()</td>
+            <td>$electrical.getPrice()</td>
+            <td>$electrical.getModel()</td>
+            <td>$electrical.getColour()</td>
+        <tr>
+            #end
+    </table>
+</div>

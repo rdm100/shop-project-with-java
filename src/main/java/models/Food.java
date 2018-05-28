@@ -1,7 +1,9 @@
 package models;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 @Entity
 @Table(name = "foods")
@@ -48,6 +50,14 @@ public class Food extends Product {
 
     public void setCalories(int calories) {
         this.calories = calories;
+    }
+
+    public String bestBeforeToString(){
+        Date date = bestBefore.getTime();
+        SimpleDateFormat formattedTime = new SimpleDateFormat("dd-MM-yyyy");
+         String dateAsString = formattedTime.format(date);
+            return dateAsString;
+
     }
 }
 

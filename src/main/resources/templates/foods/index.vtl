@@ -1,0 +1,22 @@
+<p class="pageHeader">All Foods</p>
+
+<div class="container">
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Best Before</th>
+            <th>Origin</th>
+            <th>Calories</th>
+        </tr>
+        #foreach($food in $foods)
+        <tr>
+            <td>$food.getName()</td>
+            <td>$food.getPrice()</td>
+            <td>$food.bestBeforeToString()</td>
+            <td>$food.getOrigin()</td>
+            <td>$food.getCalories()</td>
+        <tr>
+            #end
+    </table>
+</div>

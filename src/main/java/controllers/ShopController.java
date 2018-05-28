@@ -11,11 +11,18 @@ import java.util.List;
 import static spark.Spark.get;
 import static spark.SparkBase.staticFileLocation;
 
+
+
 public class ShopController {
 
     public static void main(String[] args) {
         Seeds.seedData();
         staticFileLocation("/public");
+
+        ClothesController clothesController = new ClothesController();
+        DrinksController drinksController = new DrinksController();
+        ElectronicsController electronicsController = new ElectronicsController();
+        FoodController foodController = new FoodController();
 
         VelocityTemplateEngine velocityTemplateEngine = new VelocityTemplateEngine();
 
@@ -26,4 +33,4 @@ public class ShopController {
         }, velocityTemplateEngine);
     }
 
-    }
+}
