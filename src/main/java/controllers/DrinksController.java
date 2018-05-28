@@ -51,6 +51,14 @@ public class DrinksController {
         }, new VelocityTemplateEngine());
 
 
+        get ("/drinks/new", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            String loggedInUser = LoginController.getLoggedInUserName(req, res);
+            model.put("user", loggedInUser);
+            model.put("template", "templates/drinks/create.vtl");
+            return new ModelAndView(model, "templates/layout.vtl");
+        }, new VelocityTemplateEngine());
+
 
     get("/drinks/:id", (req, res) -> {
         String strId = req.params(":id");
@@ -95,6 +103,24 @@ public class DrinksController {
             res.redirect("/drinks");
             return null;
         }, new VelocityTemplateEngine());
+
+
+
+        post ("/drinks", (req, res) ->{
+
+            String name = req.queryParams("name");
+            double price = Double.parseDouble(req.queryParams("price"));
+            int volume = Integer.parseInt(req.queryParams("volume"));
+            double sugarContent = Double.parseDouble(req.queryParams("sugarContent"));
+            double alcholContent = Double.parseDouble(req.queryParams("alcoholContent"));
+            int caffeineContent = Integer.parseInt(req.queryParams("caffeineContent"));
+            Drink drink = new Drink(name, price, volume, sugarContent, alcholContent, caffeineContent);
+            DBHelper.save(drink);
+            res.redirect("/stock");
+            return null;
+
+
+        },new VelocityTemplateEngine());
 
     }
 }
