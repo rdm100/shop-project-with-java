@@ -13,14 +13,19 @@
         </tr>
         #foreach($drink in $drinks)
         <tr>
+
             <td>$drink.getName()</td>
             <td>$drink.getPrice()</td>
             <td>$drink.getVolume()</td>
             <td>$drink.getSugarContent()</td>
             <td>$drink.getAlcholContent()</td>
             <td>$drink.getCaffineContent()</td>
-            <td><a href = "/drinks/$drink.getId()" class = "button center">Show</a></td>
+            <td><form  action="/drinks/$drink.getId()/buy" method="post">
+                <input type = "submit"  value = "Buy" name="id" class ="button center"/>
+            </form></td>
         <tr>
             #end
     </table>
 </div>
+
+

@@ -3,9 +3,7 @@ package controllers;
 import db.DBBasket;
 import db.DBCustomer;
 import db.DBHelper;
-import models.Clothing;
-import models.Customer;
-import models.Product;
+import models.*;
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
 
@@ -14,12 +12,16 @@ import java.util.List;
 import java.util.Map;
 
 import static spark.Spark.get;
+import static spark.Spark.post;
 
 public class BasketController {
 
     public BasketController() {
         this.setupEndpoints();
     }
+
+    LoginController loginController = new LoginController();
+
 
     private void setupEndpoints() {
         get("/basket", (req, res) -> {
@@ -29,9 +31,15 @@ public class BasketController {
             Customer customer = DBCustomer.findCustomerByUsername(loggedInUser);
             List<Product> products = DBBasket.AllProductsInABasket(customer.getBasket());
             model.put("products", products);
-            model.put("template", "templates/clothes/index.vtl");
-
+            model.put("template", "templates/basket/show.vtl");
             return new ModelAndView(model, "templates/layout.vtl");
+
         }, new VelocityTemplateEngine());
+
+
     }
+
+
 }
+
+

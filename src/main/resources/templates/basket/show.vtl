@@ -1,0 +1,24 @@
+<p class="pageHeader">Basket</p>
+
+<div class="container">
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th></th>
+
+        </tr>
+        #foreach($product in $products)
+        <tr>
+            <td>$product.getId()</td>
+            <td>$product.getName()</td>
+            <td>$product.getPrice()</td>
+            <td></td>
+
+
+        <tr>
+            #end
+    </table>
+    <!--<a href="/stock" class="button center">Purchase</a>-->
+</div>

@@ -22,8 +22,8 @@ public class BasketTest {
         basket = new Basket(customer);
         drink1 = new Drink("Coke", 0.50, 330, 50.0, 0.05 , 40);
         drink2 = new Drink("Pespi", 0.50, 330, 50.0, 0.05 , 40);
-        basket.addProducttoBasket(drink1, stock);
-        basket.addProducttoBasket(drink2, stock);
+        basket.addProducttoBasket(drink1);
+        basket.addProducttoBasket(drink2);
 
     }
 
@@ -39,20 +39,20 @@ public class BasketTest {
 
     @Test
     public void canRemoveFromBasket() {
-        basket.removeProducttoBasket(drink1, stock);
+        basket.removeProducttoBasket(drink1);
         assertEquals(1, basket.countProductsInBasket());
     }
 
     @Test
     public void check2ForOneDiscount() {
-        basket.addProducttoBasket(drink1, stock);
+        basket.addProducttoBasket(drink1);
         assertEquals(1.00, basket.giveTotal() );
     }
 
     @Test
     public void check2ForOneDiscountTwoProdcuts() {
-        basket.addProducttoBasket(drink1, stock);
-        basket.addProducttoBasket(drink2, stock);
+        basket.addProducttoBasket(drink1);
+        basket.addProducttoBasket(drink2);
         assertEquals(1.00, basket.giveTotal() );
     }
 
@@ -60,7 +60,7 @@ public class BasketTest {
     public void discountWithProductOverFiftyPounds(){
         Product electrical = new Electrical("Laptop", 1000, "Dell XPS", "Silver");
         stock.addProductToStock(electrical);
-        basket.addProducttoBasket(electrical, stock);
+        basket.addProducttoBasket(electrical);
         assertEquals(991, basket.giveTotal(), 0);
     }
 }

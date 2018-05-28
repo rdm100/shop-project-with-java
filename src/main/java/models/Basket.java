@@ -34,7 +34,7 @@ public class Basket {
         this.id = id;
     }
 
-    @OneToMany(mappedBy = "basket")
+    @OneToMany(mappedBy = "basket", fetch = FetchType.EAGER)
     public List<Product> getProducts() {
         return basket;
     }
@@ -56,22 +56,20 @@ public class Basket {
         return this.basket.size();
     }
 
-    public void addProducttoBasket(Product product, Stock stock){
+    public void addProducttoBasket(Product product){
         this.basket.add(product);
-        stock.removeProductFromStock(product);
         product.setBasket(this);
         DBHelper.save(product);
-        DBHelper.save(this);
-        DBHelper.save(stock);
+
+
     }
 
-    public void removeProducttoBasket(Product product, Stock stock){
+    public void removeProducttoBasket(Product product){
         this.basket.remove(product);
-        stock.addProductToStock(product);
         product.setBasket(this);
         DBHelper.save(product);
         DBHelper.save(this);
-        DBHelper.save(stock);
+
     }
 
 

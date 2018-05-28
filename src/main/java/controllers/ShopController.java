@@ -18,6 +18,7 @@ public class ShopController {
         ElectronicsController electronicsController = new ElectronicsController();
         FoodController foodController = new FoodController();
         StockController stockController = new StockController();
+        BasketController basketController = new BasketController();
 
         VelocityTemplateEngine velocityTemplateEngine = new VelocityTemplateEngine();
         get("/shop", (req, res) -> {

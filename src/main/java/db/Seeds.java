@@ -60,8 +60,8 @@ public class Seeds {
         DBHelper.save(customer2);
         DBHelper.save(basket);
         DBHelper.save(basket2);
-        basket.addProducttoBasket(food, stock);
-        basket.addProducttoBasket(electrical, stock);
+        basket.addProducttoBasket(food);
+        basket.addProducttoBasket(electrical);
         Order order = new Order(basket.basketGivesAllProductsToCustomer(), customer);
         DBHelper.save(order);
         order.giveProductsToAnOrder();

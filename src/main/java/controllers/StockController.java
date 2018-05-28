@@ -1,12 +1,10 @@
 package controllers;
 
+import db.DBCustomer;
 import db.DBHelper;
 import db.DBStock;
 import db.Seeds;
-import models.Clothing;
-import models.Food;
-import models.Product;
-import models.Stock;
+import models.*;
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
 
@@ -15,7 +13,8 @@ import java.util.List;
 import java.util.Map;
 
 import static spark.Spark.get;
-import static spark.SparkBase.staticFileLocation;
+import static spark.Spark.post;
+
 
 public class StockController {
 
@@ -25,7 +24,6 @@ public class StockController {
 
     private void setupEndpoints() {
 
-    {
 
         get("/stock", (req, res) -> {
             HashMap<String, Object> model = new HashMap<>();
@@ -35,8 +33,8 @@ public class StockController {
             model.put("user", loggedInUser);
             model.put("template", "templates/stock/index.vtl");
             return new ModelAndView(model, "templates/layout.vtl");
-        },  new VelocityTemplateEngine());
+        }, new VelocityTemplateEngine());
     }
-}
+
 }
 
