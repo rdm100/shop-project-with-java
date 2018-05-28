@@ -46,4 +46,13 @@ public class Stock {
         this.storeStockList.add(product);
         product.setStock(this);
     }
+
+    public int getQuantityOfProduct(Product productToSearch){
+        int quantity = 0;
+        for(Product product: this.storeStockList ){
+            if(product == productToSearch){
+                quantity += 1;
+            }
+        } return quantity;
+    }
 }
