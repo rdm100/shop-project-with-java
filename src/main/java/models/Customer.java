@@ -70,7 +70,7 @@ public class Customer {
         this.age = age;
     }
 
-    @Transient
+    @Column
     public double getWallet() {
         return wallet;
     }

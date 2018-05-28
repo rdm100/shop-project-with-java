@@ -1,0 +1,28 @@
+<p class="pageHeader">Food</p>
+<div class="container">
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Best Before</th>
+            <th>Origin</th>
+            <th>Calories</th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr>
+            <td>$food.getName()</td>
+            <td>$food.getPrice()</td>
+            <td>$food.getBestBefore()</td>
+            <td>$food.getOrigin()</td>
+            <td>$food.getCalories()</td>
+            <td><a href = "/foods/$food.getId()/edit" class = "button center">Edit</a></td>
+            <td>  <form action="/foods/$food.getId()/delete" method="post">
+                <input type="submit" value="Delete" class="button center">
+            </form>  </td>
+        <tr>
+    </table>
+    <form action="/foods/$food.getId()/delete" method="post">
+        <input type="submit" value="Delete" class="button center">
+    </form>
+</div>

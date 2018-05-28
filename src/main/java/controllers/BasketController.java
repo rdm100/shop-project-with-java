@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static spark.Spark.before;
 import static spark.Spark.get;
 import static spark.Spark.post;
 
@@ -37,6 +38,19 @@ public class BasketController {
         }, new VelocityTemplateEngine());
 
 
+
+        post("/basket/buy", (req, res) -> {
+            String loggedInUser = LoginController.getLoggedInUserName(req, res);
+            Customer customer = DBCustomer.findCustomerByUsername(loggedInUser);
+            Basket customersBasket = customer.getBasket();
+            customer.customerCanAffordShopping(customersBasket);
+            customer.customerPaysForBasket(customersBasket);
+            customersBasket.basketGivesAllProductsToCustomer();
+            Order order = new Order(customersBasket.basketGivesAllProductsToCustomer(), customer);
+
+            res.redirect("/shop");
+            return null;
+        }, new VelocityTemplateEngine());
     }
 
 

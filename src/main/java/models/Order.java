@@ -58,7 +58,9 @@ public class Order {
         this.customer = customer;
     }
 
-    public int countItemsInOrder(){
+
+    @Column
+    public int getcounOftItemsInOrder(){
        return this.boughtProducts.size();
     }
 
@@ -73,6 +75,14 @@ public class Order {
 
         }
 
+    }
+
+    @Column(name ="order_total")
+    public double getOrderTotal(){
+        double total = 0;
+        for (Product product: this.boughtProducts){
+            total += product.getPrice();
+        } return total;
     }
 
 
