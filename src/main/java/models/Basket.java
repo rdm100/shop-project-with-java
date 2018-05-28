@@ -5,6 +5,7 @@ import db.DBHelper;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "baskets")
@@ -93,11 +94,65 @@ public class Basket {
         double result = 0;
         for(Product product: basket){
             result += product.getPrice();
+
+
         } return result;
     }
 
     public void updateCustomerOrderFromBasket(Order order){
         order.addBasketProductsToOrder(basketGivesAllProductsToCustomer());
         order.setCustomer(this.customer);
+    }
+
+    public double discountAmount() {
+        if (calculateTotalCostOfAllItemsInBasket() > 50.00) {
+            return 10;
+        }
+        double twoForOneDiscount = 0;
+        List<Product> cloned = this.basket.stream().distinct().collect(Collectors.toList());
+        for (Product product : cloned) {
+           int quantity = getQuantityOfProductInBasket(product);
+
+            if(quantity == 2 ){
+                twoForOneDiscount += product.getPrice();
+
+            }
+            if(quantity == 3 ){
+                twoForOneDiscount += product.getPrice();
+
+            }
+            if(quantity == 4 ){
+                twoForOneDiscount += (product.getPrice() * 2);
+
+            }
+             if(quantity == 5 ){
+                twoForOneDiscount += (product.getPrice() * 2);
+
+            }
+            if(quantity > 6 ){
+                twoForOneDiscount += (product.getPrice() * 3);
+
+            }
+
+           }return twoForOneDiscount;
+
+        }
+
+
+
+    public int getQuantityOfProductInBasket(Product productToSearch){
+        int quantity = 0;
+        for(Product product: this.basket ){
+            if(product == productToSearch){
+                quantity += 1;
+            }
+        } return quantity;
+    }
+
+    public double giveTotal(){
+       double result = 0;
+        result += calculateTotalCostOfAllItemsInBasket() ;
+        result -= discountAmount();
+        return result;
     }
 }

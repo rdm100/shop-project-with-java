@@ -42,6 +42,27 @@ public class BasketTest {
         basket.removeProducttoBasket(drink1, stock);
         assertEquals(1, basket.countProductsInBasket());
     }
+
+    @Test
+    public void check2ForOneDiscount() {
+        basket.addProducttoBasket(drink1, stock);
+        assertEquals(1.00, basket.giveTotal() );
+    }
+
+    @Test
+    public void check2ForOneDiscountTwoProdcuts() {
+        basket.addProducttoBasket(drink1, stock);
+        basket.addProducttoBasket(drink2, stock);
+        assertEquals(1.00, basket.giveTotal() );
+    }
+
+    @Test
+    public void discountWithProductOverFiftyPounds(){
+        Product electrical = new Electrical("Laptop", 1000, "Dell XPS", "Silver");
+        stock.addProductToStock(electrical);
+        basket.addProducttoBasket(electrical, stock);
+        assertEquals(991, basket.giveTotal(), 0);
+    }
 }
 
 
