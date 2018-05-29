@@ -25,7 +25,7 @@ public class Customer {
         this.name = name;
         this.age = age;
         this.wallet = wallet;
-        this.products = new ArrayList<Product>();
+        this.products = new ArrayList<>();
         this.orders = new ArrayList<>();
     }
 
@@ -104,7 +104,8 @@ public class Customer {
     public double customerPaysForBasket(Basket basket){
         double total = basket.calculateTotalCostOfAllItemsInBasket();
         if(customerCanAffordShopping(basket)){
-            setWallet(getWallet() - basket.calculateTotalCostOfAllItemsInBasket());
+            setWallet(getWallet() - basket.giveTotal());
+            this.basket.clearBasket();
             return  total;
         } return 0;
     }

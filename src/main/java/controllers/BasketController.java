@@ -31,7 +31,8 @@ public class BasketController {
             model.put("user", loggedInUser);
             Customer customer = DBCustomer.findCustomerByUsername(loggedInUser);
             List<Product> products = DBBasket.AllProductsInABasket(customer.getBasket());
-            model.put("basket", Basket.class);
+            Basket basket = customer.getBasket();
+            model.put("basket", basket);
             model.put("products", products);
             model.put("template", "templates/basket/show.vtl");
             return new ModelAndView(model, "templates/layout.vtl");
@@ -47,8 +48,11 @@ public class BasketController {
             customer.customerCanAffordShopping(customersBasket);
             customer.customerPaysForBasket(customersBasket);
             customersBasket.basketGivesAllProductsToCustomer();
-            DBHelper.save(customer);
             Order order = new Order(customersBasket.basketGivesAllProductsToCustomer(), customer);
+            customersBasket.clearBasket();
+
+            DBHelper.save(customersBasket);
+            DBHelper.save(customer);
             DBHelper.save(order);
             res.redirect("/account");
             return null;

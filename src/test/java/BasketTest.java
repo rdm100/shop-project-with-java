@@ -63,6 +63,12 @@ public class BasketTest {
         basket.addProducttoBasket(electrical);
         assertEquals(991, basket.giveTotal(), 0);
     }
+
+    @Test
+    public void emptyBasket() {
+        basket.basketGivesAllProductsToCustomer();
+        assertEquals(0,basket.countProductsInBasket() );
+    }
 }
 
 

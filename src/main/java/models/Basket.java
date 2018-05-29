@@ -81,6 +81,7 @@ public class Basket {
 
          return customerProducts;
 
+
     }
 
     public void allBasketItemsGoBackIntoStock(Stock stock){
@@ -152,5 +153,9 @@ public class Basket {
         result += calculateTotalCostOfAllItemsInBasket() ;
         result -= discountAmount();
         return result;
+    }
+
+    public void clearBasket(){
+        this.basket.clear();
     }
 }
