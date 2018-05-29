@@ -16,13 +16,10 @@
             <td>$food.bestBeforeToString()</td>
             <td>$food.getOrigin()</td>
             <td>$food.getCalories()</td>
-            <td><a href = "/foods/$food.getId()/edit" class = "button center">Edit</a></td>
-            <td>  <form action="/foods/$food.getId()/delete" method="post">
-                <input type="submit" value="Delete" class="button center">
-            </form>  </td>
+            <td><form  action="/foods/$food.getId()/buy" method="post">
+                <input type = "submit"  value = "add To Basket" name="id" class ="button center"/>
+            </form></td>
         <tr>
     </table>
-    <form action="/foods/$food.getId()/delete" method="post">
-        <input type="submit" value="Delete" class="button center">
-    </form>
+
 </div>

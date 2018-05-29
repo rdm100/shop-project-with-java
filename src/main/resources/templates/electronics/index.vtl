@@ -11,7 +11,7 @@
         </tr>
         #foreach($electrical in $electronics)
         <tr>
-            <td>$electrical.getName()</td>
+            <td><a href="/electronics/$electrical.getId()" >$electrical.getName()</a></td>
             <td>$electrical.getPrice()</td>
             <td>$electrical.getModel()</td>
             <td>$electrical.getColour()</td>

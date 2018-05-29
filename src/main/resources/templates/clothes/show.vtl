@@ -8,7 +8,7 @@
             <th>Colour</th>
             <th>Range</th>
             <th></th>
-            <th></th>
+
         </tr>
         <tr>
             <td>$clothes.getName()</td>
@@ -16,10 +16,10 @@
             <td>$clothes.getSize()</td>
             <td>$clothes.getColour()</td>
             <td>$clothes.getRange()</td>
-            <td><a href = "/clothes/$clothes.getId()/edit" class = "button center">Edit</a></td>
-            <td>  <form action="/clothes/$clothes.getId()/delete" method="post">
-                <input type="submit" value="Delete" class="button center">
-            </form>  </td>
+            <td><form  action="/clothes/$clothes.getId()/buy" method="post">
+                <input type = "submit"  value = "Add to basket" name="id" class ="button center"/>
+            </form></td>
+
         <tr>
     </table>
 

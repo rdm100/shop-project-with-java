@@ -57,7 +57,6 @@ public class Food extends Product {
         SimpleDateFormat formattedTime = new SimpleDateFormat("dd-MM-yyyy");
          String dateAsString = formattedTime.format(date);
             return dateAsString;
-
     }
 }
 

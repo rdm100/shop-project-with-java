@@ -11,7 +11,7 @@
         </tr>
         #foreach($food in $foods)
         <tr>
-            <td>$food.getName()</td>
+            <td><a href="/foods/$food.getId()" >$food.getName()<a/></td>
             <td>$food.getPrice()</td>
             <td>$food.bestBeforeToString()</td>
             <td>$food.getOrigin()</td>

@@ -12,7 +12,7 @@
         </tr>
         #foreach($clothes in $clothes)
         <tr>
-            <td>$clothes.getName()</td>
+            <td><a href="/clothes/$clothes.getId()" >$clothes.getName()</a></td>
             <td>$clothes.getPrice()</td>
             <td>$clothes.getSize()</td>
             <td>$clothes.getColour()</td>
@@ -20,7 +20,7 @@
             <td><form  action="/clothes/$clothes.getId()/buy" method="post">
                 <input type = "submit"  value = "Add to basket" name="id" class ="button center"/>
             </form></td>
-        <tr>
+        </tr>
             #end
     </table>
 </div>

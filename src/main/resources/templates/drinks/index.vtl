@@ -14,7 +14,7 @@
         #foreach($drink in $drinks)
         <tr>
 
-            <td>$drink.getName()</td>
+            <td><a href="/drinks/$drink.getId()" >$drink.getName()</a></td>
             <td>$drink.getPrice()</td>
             <td>$drink.getVolume()</td>
             <td>$drink.getSugarContent()</td>
@@ -23,7 +23,7 @@
             <td><form  action="/drinks/$drink.getId()/buy" method="post">
                 <input type = "submit"  value = "Add to basket" name="id" class ="button center"/>
             </form></td>
-        <tr>
+        </tr>
             #end
     </table>
 </div>
