@@ -39,7 +39,6 @@ public class Order {
     }
 
     @ManyToMany(mappedBy = "orders", fetch = FetchType.EAGER)
-
     public List<Product> getProducts() {
         return boughtProducts;
     }
@@ -86,4 +85,11 @@ public class Order {
     public void setAmountPaid(double amountPaid) {
         this.amountPaid = amountPaid;
     }
+
+    public void setProductToOrder(){
+        for(Product product: this.boughtProducts){
+            product.addOrdertoProduct(this);
+        }
+    }
 }
+

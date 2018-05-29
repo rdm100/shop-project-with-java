@@ -15,8 +15,8 @@ public class Drink extends Product {
     public Drink() {
     }
 
-    public Drink(String name, double price, int volume, double sugarContent, double alcoholContent, int caffeineContent) {
-        super(name, price);
+    public Drink(String name, double price,  Stock stock, int volume, double sugarContent, double alcoholContent, int caffeineContent) {
+        super(name, price, stock);
         this.volume = volume;
         this.sugarContent = sugarContent;
         this.alcholContent = alcoholContent;

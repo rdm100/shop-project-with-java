@@ -2,10 +2,9 @@ package controllers;
 
 
 import controllers.LoginController;
+import db.DBCustomer;
 import db.DBHelper;
-import models.Electrical;
-import models.Food;
-import models.Product;
+import models.*;
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
 
@@ -72,6 +71,30 @@ public class FoodController {
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
+
+
+        post("/foods/:id/buy", (req, res) -> {
+            String strId = req.params("id");
+            Integer intId = Integer.parseInt(strId);
+            String loggedInUser = LoginController.getLoggedInUserName(req, res);
+            Product product = DBHelper.find(Product.class, intId);
+            Customer customer = DBCustomer.findCustomerByUsername(loggedInUser);
+            if(customer.getBasket() == null){
+                Basket basket = new Basket(customer);
+                customer.setBasket(basket);
+                basket.setCustomer(customer);
+                DBHelper.save(customer);
+                DBHelper.save(basket);
+            }
+            if(customer.getBasket().getCustomer() == null){
+                customer.getBasket().setCustomer(customer);
+                DBHelper.save(customer.getBasket());
+            }
+            customer.getBasket().addProducttoBasket(product);
+            res.redirect("/basket");
+            return null;
+        }, new VelocityTemplateEngine());
+
         post ("/foods/:id", (req, res) ->{
             String strId = req.params(":id");
             Integer intId = Integer.parseInt(strId);
@@ -79,10 +102,6 @@ public class FoodController {
             String name = req.queryParams("name");
             double price = Double.parseDouble(req.queryParams("price"));
             String bestBefore = req.queryParams("bestBefore");
-//            DateFormat formatter = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
-//            formatter.setLenient(false);
-//            Calendar cal  = Calendar.getInstance();
-//            cal.setTime(formatter.parse(bestBefore,new ParsePosition(0)));
             String pattern = "dd-MM-yyyy";
             Date date = new SimpleDateFormat(pattern).parse(bestBefore, new ParsePosition(0));
             Calendar calendar = Calendar.getInstance();
@@ -111,7 +130,7 @@ public class FoodController {
 
 
         post ("/foods", (req, res) ->{
-
+            Stock stock = (Stock)DBHelper.getAll(Stock.class).get(0);
             String name = req.queryParams("name");
             double price = Double.parseDouble(req.queryParams("price"));
             String bestBefore = req.queryParams("bestBefore");
@@ -121,7 +140,7 @@ public class FoodController {
             calendar.setTime(date);
             String origin = req.queryParams("origin");
             int calories = Integer.parseInt(req.queryParams("calories"));
-            Food food = new Food(name, price, calendar, origin, calories);
+            Food food = new Food(name, price,stock,  calendar, origin, calories);
             DBHelper.save(food);
             res.redirect("/stock");
             return null;

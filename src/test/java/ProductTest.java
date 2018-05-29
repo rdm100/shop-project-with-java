@@ -10,6 +10,7 @@ import static org.junit.Assert.assertEquals;
 public class ProductTest {
 
     Food food;
+    Stock stock;
 
     @Before
     public void setUp() throws Exception {
@@ -17,7 +18,8 @@ public class ProductTest {
         bestBefore.set(Calendar.YEAR, 2018);
         bestBefore.set(Calendar.MONTH, 10);
         bestBefore.set(Calendar.DAY_OF_MONTH, 16);
-        food = new Food("Bread", 100, bestBefore, "Scotland", 100);
+        stock = new Stock();
+        food = new Food("Bread", 100,stock,  bestBefore, "Scotland", 100);
 
     }
 

@@ -2,10 +2,9 @@ package controllers;
 
 
 
+import db.DBCustomer;
 import db.DBHelper;
-import models.Drink;
-import models.Electrical;
-import models.Product;
+import models.*;
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
 
@@ -73,6 +72,30 @@ public class ElectronicsController {
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
+
+
+        post("/electronics/:id/buy", (req, res) -> {
+            String strId = req.params("id");
+            Integer intId = Integer.parseInt(strId);
+            String loggedInUser = LoginController.getLoggedInUserName(req, res);
+            Product product = DBHelper.find(Product.class, intId);
+            Customer customer = DBCustomer.findCustomerByUsername(loggedInUser);
+            if(customer.getBasket() == null){
+                Basket basket = new Basket(customer);
+                customer.setBasket(basket);
+                basket.setCustomer(customer);
+                DBHelper.save(customer);
+                DBHelper.save(basket);
+            }
+            if(customer.getBasket().getCustomer() == null){
+                customer.getBasket().setCustomer(customer);
+                DBHelper.save(customer.getBasket());
+            }
+            customer.getBasket().addProducttoBasket(product);
+            res.redirect("/basket");
+            return null;
+        }, new VelocityTemplateEngine());
+
         post ("/electronics/:id", (req, res) ->{
             String strId = req.params(":id");
             Integer intId = Integer.parseInt(strId);
@@ -102,12 +125,13 @@ public class ElectronicsController {
 
 
         post ("/electronics", (req, res) ->{
+            Stock stock = (Stock)DBHelper.getAll(Stock.class).get(0);
 
             String name = req.queryParams("name");
             double price = Double.parseDouble(req.queryParams("price"));
             String model = req.queryParams("model");
             String colour = req.queryParams("colour");
-            Electrical electrical = new Electrical(name, price, model, colour);
+            Electrical electrical = new Electrical(name, price,stock,  model, colour);
             DBHelper.save(electrical);
             res.redirect("/stock");
             return null;

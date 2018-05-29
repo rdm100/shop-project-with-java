@@ -16,8 +16,8 @@ public class StockTest {
     @Before
     public void setUp() throws Exception {
         stock = new Stock();
-        drink = new Drink("Coke", 0.50, 330, 50.0, 0.05 , 40);
-        drink2 = new Drink("Pepsi Max", 0.65, 330, 50.0, 0.05 , 40);
+        drink = new Drink("Coke", 0.50,stock,  330, 50.0, 0.05 , 40);
+        drink2 = new Drink("Pepsi Max", 0.65,stock,  330, 50.0, 0.05 , 40);
 
     }
 

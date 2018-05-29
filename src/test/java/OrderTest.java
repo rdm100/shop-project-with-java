@@ -20,8 +20,9 @@ public class OrderTest {
     public void setUp() throws Exception {
         customer = new Customer("rdm", "Roberto", 39, 10000);
         basket = new Basket(customer);
-        drink1 = new Drink("Coke", 0.50, 330, 50.0, 0.05 , 40);
-        drink2 = new Drink("Pespi", 0.50, 330, 50.0, 0.05 , 40);
+        stock = new Stock();
+        drink1 = new Drink("Coke", 0.50,stock,  330, 50.0, 0.05 , 40);
+        drink2 = new Drink("Pespi", 0.50,stock,  330, 50.0, 0.05 , 40);
         basket.addProducttoBasket(drink1);
         basket.addProducttoBasket(drink2);
         order = new Order(basket.basketGivesAllProductsToCustomer(), customer, basket.giveTotal());

@@ -46,12 +46,13 @@ public class BasketController {
             Customer customer = DBCustomer.findCustomerByUsername(loggedInUser);
             Basket customersBasket = customer.getBasket();
             double amountPaid = customer.getBasket().giveTotal();
+            Order order = new Order(customersBasket.getProducts(), customer, amountPaid);
             customer.customerPaysForBasket(customersBasket);
-            Order order = new Order(customersBasket.basketGivesAllProductsToCustomer(), customer, amountPaid);
+            DBHelper.save(order);
             customersBasket.clearBasket();
             DBHelper.save(customersBasket);
             DBHelper.save(customer);
-            DBHelper.save(order);
+
             res.redirect("/account");
             return null;
         }, new VelocityTemplateEngine());

@@ -1,10 +1,10 @@
 package models;
 
 import db.DBHelper;
+import org.apache.commons.collections.map.HashedMap;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Table(name = "stock")
@@ -38,29 +38,33 @@ public class Stock {
         this.storeStockList = storeStockList;
     }
 
-    public int stockListCount(){
+    public int stockListCount() {
         return this.storeStockList.size();
     }
 
-    public void addProductToStock(Product product){
+    public void addProductToStock(Product product) {
         this.storeStockList.add(product);
-//        product.setStock(this);
     }
 
-    public void removeProductFromStock(Product product){
+    public void removeProductFromStock(Product product) {
         this.storeStockList.remove(product);
     }
 
-    public int getQuantityOfProduct(Product productToSearch){
+    public int getQuantityOfProduct(Product productToSearch) {
         int quantity = 0;
-        for(Product product: this.storeStockList ){
-            if(product == productToSearch){
+        for (Product product : this.storeStockList) {
+            if (product.equals(productToSearch)) {
                 quantity += 1;
             }
-        } return quantity;
+        }
+        return quantity;
     }
 
-    public void addMulitpleThingsToStock(List<Product> products){
+    public void addMulitpleThingsToStock(List<Product> products) {
         this.storeStockList.addAll(products);
     }
+
 }
+
+
+

@@ -20,8 +20,8 @@ public class BasketTest {
         stock.addProductToStock(drink2);
         customer = new Customer("rdm", "Roberto", 39, 10000);
         basket = new Basket(customer);
-        drink1 = new Drink("Coke", 0.50, 330, 50.0, 0.05 , 40);
-        drink2 = new Drink("Pespi", 0.50, 330, 50.0, 0.05 , 40);
+        drink1 = new Drink("Coke", 0.50,stock,  330, 50.0, 0.05 , 40);
+        drink2 = new Drink("Pespi", 0.50,stock,  330, 50.0, 0.05 , 40);
         basket.addProducttoBasket(drink1);
         basket.addProducttoBasket(drink2);
 
@@ -58,7 +58,7 @@ public class BasketTest {
 
     @Test
     public void discountWithProductOverFiftyPounds(){
-        Product electrical = new Electrical("Laptop", 1000, "Dell XPS", "Silver");
+        Product electrical = new Electrical("Laptop", 1000,stock,  "Dell XPS", "Silver");
         stock.addProductToStock(electrical);
         basket.addProducttoBasket(electrical);
         assertEquals(991, basket.giveTotal(), 0);

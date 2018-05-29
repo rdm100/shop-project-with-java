@@ -84,12 +84,13 @@ public class ClothesController {
         }, new VelocityTemplateEngine());
 
         post ("/clothes", (req, res) ->{
+            Stock stock = (Stock)DBHelper.getAll(Stock.class).get(0);
             String name = req.queryParams("name");
             double price = Double.parseDouble(req.queryParams("price"));
             String size = req.queryParams("size");
             String colour = req.queryParams("colour");
             String range = req.queryParams("range");
-            Clothing clothing = new Clothing(name, price, size, colour, range);
+            Clothing clothing = new Clothing(name, price, stock, size, colour, range);
             DBHelper.save(clothing);
             res.redirect("/stock");
             return null;

@@ -28,8 +28,10 @@ public class StockController {
         get("/stock", (req, res) -> {
             HashMap<String, Object> model = new HashMap<>();
             String loggedInUser = LoginController.getLoggedInUserName(req, res);
-            List<Product> products = DBHelper.getAll(Product.class);
+
             Stock stock = (Stock) DBHelper.getAll(Stock.class).get(0);
+            List<Product> products = DBStock.AllProductsBelongingToStock(stock);
+
             model.put("products", products);
             model.put("stock", stock);
             model.put("user", loggedInUser);

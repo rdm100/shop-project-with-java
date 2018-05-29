@@ -22,10 +22,11 @@ public abstract class Product {
     public Product() {
     }
 
-    public Product(String name, double price) {
+    public Product(String name, double price, Stock stock) {
         this.name = name;
         this.price = price;
         this.orders = new ArrayList<>();
+        this.stock = stock;
 
     }
 
@@ -85,7 +86,7 @@ public abstract class Product {
             joinColumns = {@JoinColumn(name = "product_id")},
             inverseJoinColumns = {@JoinColumn(name = "order_id")}
     )
-    @Fetch(FetchMode.SELECT)
+    @Fetch(FetchMode.SUBSELECT)
     public List<Order> getOrders() {
         return orders;
     }
@@ -96,7 +97,6 @@ public abstract class Product {
 
     public void addOrdertoProduct(Order order){
         this.orders.add(order);
-        DBHelper.save(this);
 
     }
 

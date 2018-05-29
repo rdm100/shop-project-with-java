@@ -27,14 +27,13 @@ public class Seeds {
         bestBefore.set(Calendar.YEAR, 2018);
         bestBefore.set(Calendar.MONTH, 10);
         bestBefore.set(Calendar.DAY_OF_MONTH, 16);
-
-        Product drink = new Drink("Coke", 0.50, 330, 50.0, 0.05, 40);
-        Product drink3 = new Drink("Coke", 0.50, 330, 50.0, 0.05, 40);
-        Product drink2 = new Drink("Pespi", 0.50, 330, 50.0, 0.05, 40);
-        Product clothing = new Clothing("Levis", 100, "M", "Black", "Mens");
-        Product electrical = new Electrical("Laptop", 1000, "Dell XPS", "Silver");
-        Product food = new Food("Bread", 100, bestBefore, "Scotland", 100);
         Stock stock = new Stock();
+        Product drink = new Drink("Coke", 0.50,stock,  330, 50.0, 0.05, 40);
+        Product drink2 = new Drink("Pespi", 0.50,stock,  330, 50.0, 0.05, 40);
+        Product clothing = new Clothing("Levis", 100,stock,  "M", "Black", "Mens");
+        Product electrical = new Electrical("Laptop", 1000,stock,  "Dell XPS", "Silver");
+        Product food = new Food("Bread", 100,stock,  bestBefore, "Scotland", 100);
+
         DBHelper.save(stock);
 
 
@@ -52,7 +51,6 @@ public class Seeds {
 
         DBHelper.save(drink);
         DBHelper.save(drink2);
-        DBHelper.save(drink3);
         DBHelper.save(clothing);
         DBHelper.save(electrical);
         DBHelper.save(food);
@@ -65,7 +63,8 @@ public class Seeds {
         DBHelper.save(basket2);
         basket.addProducttoBasket(food);
         basket.addProducttoBasket(electrical);
-        Order order = new Order(basket.basketGivesAllProductsToCustomer(), customer, basket.giveTotal());
+        double total = basket.giveTotal();
+        Order order = new Order(basket.basketGivesAllProductsToCustomer(), customer, total);
         DBHelper.save(order);
         order.giveProductsToAnOrder();
         DBHelper.save(food);
@@ -86,11 +85,22 @@ public class Seeds {
         List<Order> orders = DBCustomer.AllOrdersBelongingToACustomer(customer);
         List<Product> productsFromBasket = DBBasket.AllProductsInABasket(basket);
         List<Product> productsFromOrder = DBOrder.findProductsInOrder(order);
-        Stock Findingstock =DBHelper.find(Stock.class, stock.getId() );
         List<Product> productsFromStock = DBStock.AllProductsBelongingToStock(stock);
         Customer foundCustomerByUserName = DBCustomer.findCustomerByUsername("rdm");
         List<Product> searchedProducts = DBProduct.productsFromSearch("co");
         List<Product> allProducts = DBHelper.getAll(Product.class);
+        for (int i = 1; i < 5; i++){
+        for(Product product: allProducts){
+            stock.addProductToStock(product);
+            product.setStock(stock);
+            DBHelper.save(product);}
+        }
+
+        DBHelper.save(stock);
+        Stock Findingstock = DBHelper.find(Stock.class, stock.getId() );
+
+
+
 
     }
 

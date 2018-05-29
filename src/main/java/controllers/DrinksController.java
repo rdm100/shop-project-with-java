@@ -128,14 +128,14 @@ public class DrinksController {
         }, new VelocityTemplateEngine());
 
         post ("/drinks", (req, res) ->{
-
+            Stock stock = (Stock)DBHelper.getAll(Stock.class).get(0);
             String name = req.queryParams("name");
             double price = Double.parseDouble(req.queryParams("price"));
             int volume = Integer.parseInt(req.queryParams("volume"));
             double sugarContent = Double.parseDouble(req.queryParams("sugarContent"));
             double alcholContent = Double.parseDouble(req.queryParams("alcoholContent"));
             int caffeineContent = Integer.parseInt(req.queryParams("caffeineContent"));
-            Drink drink = new Drink(name, price, volume, sugarContent, alcholContent, caffeineContent);
+            Drink drink = new Drink(name, price,stock,  volume, sugarContent, alcholContent, caffeineContent);
             DBHelper.save(drink);
             res.redirect("/stock");
             return null;
