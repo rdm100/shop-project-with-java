@@ -77,12 +77,7 @@ public class Order {
 
     }
 
-    public double orderTotal(){
-        double total = 0;
-        for (Product product: this.boughtProducts){
-            total += product.getPrice();
-        } return total;
-    }
+
 
 
 

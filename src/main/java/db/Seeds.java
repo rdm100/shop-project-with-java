@@ -29,6 +29,7 @@ public class Seeds {
         bestBefore.set(Calendar.DAY_OF_MONTH, 16);
 
         Product drink = new Drink("Coke", 0.50, 330, 50.0, 0.05, 40);
+        Product drink3 = new Drink("Coke", 0.50, 330, 50.0, 0.05, 40);
         Product drink2 = new Drink("Pespi", 0.50, 330, 50.0, 0.05, 40);
         Product clothing = new Clothing("Levis", 100, "M", "Black", "Mens");
         Product electrical = new Electrical("Laptop", 1000, "Dell XPS", "Silver");
@@ -51,6 +52,7 @@ public class Seeds {
 
         DBHelper.save(drink);
         DBHelper.save(drink2);
+        DBHelper.save(drink3);
         DBHelper.save(clothing);
         DBHelper.save(electrical);
         DBHelper.save(food);

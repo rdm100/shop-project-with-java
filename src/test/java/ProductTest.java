@@ -30,4 +30,7 @@ public class ProductTest {
     public void getProductTypeString() {
         assertEquals("food", food.productType());
     }
+
+
+
 }

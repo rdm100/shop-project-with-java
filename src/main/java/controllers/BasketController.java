@@ -31,6 +31,7 @@ public class BasketController {
             model.put("user", loggedInUser);
             Customer customer = DBCustomer.findCustomerByUsername(loggedInUser);
             List<Product> products = DBBasket.AllProductsInABasket(customer.getBasket());
+            model.put("basket", Basket.class);
             model.put("products", products);
             model.put("template", "templates/basket/show.vtl");
             return new ModelAndView(model, "templates/layout.vtl");

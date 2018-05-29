@@ -6,7 +6,7 @@
             <th>Id</th>
             <th>Name</th>
             <th>Price</th>
-            <th></th>
+            <th>Quantity</th>
 
         </tr>
         #foreach($product in $products)
@@ -14,7 +14,7 @@
             <td>$product.getId()</td>
             <td>$product.getName()</td>
             <td>$product.getPrice()</td>
-            <td></td>
+            <td>$product.getBasket().getQuantityOfProductInBasket($product)</td>
 
 
         <tr>
