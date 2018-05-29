@@ -46,8 +46,9 @@ public class BasketController {
             customer.customerCanAffordShopping(customersBasket);
             customer.customerPaysForBasket(customersBasket);
             customersBasket.basketGivesAllProductsToCustomer();
+            DBHelper.save(customer);
             Order order = new Order(customersBasket.basketGivesAllProductsToCustomer(), customer);
-
+            DBHelper.save(order);
             res.redirect("/account");
             return null;
         }, new VelocityTemplateEngine());

@@ -11,10 +11,9 @@
         #foreach($order in $orders)
         <tr>
             <td>$order.getId()</td>
-            <td>$order.getP</td>
-            <td>$engineer.getDepartment().getTitle()</td>
-            <td>$engineer.getSalary()</td>
-            <td><a href="/engineers/$engineer.getId()" class="button center">Details</a></td>
+            <td>$order.countOfItemsInOrder()</td>
+            <td>$order.orderTotal()</td>
+
         <tr>
             #end
     </table>

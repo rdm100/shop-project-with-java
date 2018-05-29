@@ -36,8 +36,8 @@ public class Order {
         this.id = id;
     }
 
-    @ManyToMany(mappedBy = "orders")
-    @Fetch(FetchMode.SELECT)
+    @ManyToMany(mappedBy = "orders", fetch = FetchType.EAGER)
+
     public List<Product> getProducts() {
         return boughtProducts;
     }
@@ -59,8 +59,8 @@ public class Order {
     }
 
 
-    @Column
-    public int countOftItemsInOrder(){
+
+    public int countOfItemsInOrder(){
        return this.boughtProducts.size();
     }
 
@@ -77,7 +77,6 @@ public class Order {
 
     }
 
-    @Column(name ="order_total")
     public double orderTotal(){
         double total = 0;
         for (Product product: this.boughtProducts){

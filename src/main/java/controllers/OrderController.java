@@ -30,7 +30,6 @@ public class OrderController {
             String loggedInUser = LoginController.getLoggedInUserName(req, res);
             model.put("user", loggedInUser);
             Customer customer = DBCustomer.findCustomerByUsername(loggedInUser);
-
             List<Order> orders = DBCustomer.AllOrdersBelongingToACustomer(customer);
             model.put("orders", orders);
             model.put("template", "templates/orders/show.vtl");

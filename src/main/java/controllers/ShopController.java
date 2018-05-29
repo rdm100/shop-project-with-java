@@ -1,6 +1,8 @@
 package controllers;
 import db.DBHelper;
+import db.DBProduct;
 import db.Seeds;
+import models.Product;
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
 import java.util.HashMap;
@@ -29,6 +31,19 @@ public class ShopController {
             model.put("user", loggedInUser);
             model.put("template", "templates/shop/index.vtl");
             return new ModelAndView(model, "templates/layout.vtl");
-        }, velocityTemplateEngine);
+            }, velocityTemplateEngine);
+
+
+        get("shop/results", (req, res) ->{
+            HashMap<String, Object> model = new HashMap<>();
+            String loggedInUser = LoginController.getLoggedInUserName(req, res);
+            model.put("user", loggedInUser);
+            String search = req.queryParams("search");
+            List<Product> products = DBProduct.productsFromSearch(search);
+            model.put("products", products);
+            model.put("template", "templates/shop/search.vtl");
+            return new ModelAndView(model, "templates/layout.vtl");
+        }, velocityTemplateEngine  );
     }
+
 }
