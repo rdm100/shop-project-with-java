@@ -45,9 +45,7 @@ public class BasketController {
             String loggedInUser = LoginController.getLoggedInUserName(req, res);
             Customer customer = DBCustomer.findCustomerByUsername(loggedInUser);
             Basket customersBasket = customer.getBasket();
-            customer.customerCanAffordShopping(customersBasket);
             customer.customerPaysForBasket(customersBasket);
-            customersBasket.basketGivesAllProductsToCustomer();
             Order order = new Order(customersBasket.basketGivesAllProductsToCustomer(), customer);
             customersBasket.clearBasket();
 

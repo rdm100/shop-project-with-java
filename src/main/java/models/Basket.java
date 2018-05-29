@@ -156,6 +156,10 @@ public class Basket {
     }
 
     public void clearBasket(){
+        for(Product product: basket){
+            product.setBasket(null);
+            DBHelper.save(product);
+        }
         this.basket.clear();
     }
 }
