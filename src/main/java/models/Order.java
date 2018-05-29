@@ -60,7 +60,7 @@ public class Order {
 
 
     @Column
-    public int getcounOftItemsInOrder(){
+    public int countOftItemsInOrder(){
        return this.boughtProducts.size();
     }
 
@@ -78,12 +78,13 @@ public class Order {
     }
 
     @Column(name ="order_total")
-    public double getOrderTotal(){
+    public double orderTotal(){
         double total = 0;
         for (Product product: this.boughtProducts){
             total += product.getPrice();
         } return total;
     }
+
 
 
 }

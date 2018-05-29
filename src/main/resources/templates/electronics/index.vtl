@@ -7,6 +7,7 @@
             <th>Price</th>
             <th>Model</th>
             <th>Colour</th>
+            <th></th>
         </tr>
         #foreach($electrical in $electronics)
         <tr>
@@ -14,6 +15,9 @@
             <td>$electrical.getPrice()</td>
             <td>$electrical.getModel()</td>
             <td>$electrical.getColour()</td>
+            <td><form  action="/electronics/$electrical.getId()/buy" method="post">
+                <input type = "submit"  value = "Buy" name="id" class ="button center"/>
+            </form></td>
         <tr>
             #end
     </table>

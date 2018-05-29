@@ -48,7 +48,7 @@ public class BasketController {
             customersBasket.basketGivesAllProductsToCustomer();
             Order order = new Order(customersBasket.basketGivesAllProductsToCustomer(), customer);
 
-            res.redirect("/shop");
+            res.redirect("/account");
             return null;
         }, new VelocityTemplateEngine());
     }

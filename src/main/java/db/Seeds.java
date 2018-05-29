@@ -87,6 +87,9 @@ public class Seeds {
         Stock Findingstock =DBHelper.find(Stock.class, stock.getId() );
         List<Product> productsFromStock = DBStock.AllProductsBelongingToStock(stock);
         Customer foundCustomerByUserName = DBCustomer.findCustomerByUsername("rdm");
+        List<Product> searchedProducts = DBProduct.productsFromSearch("co");
+        List<Product> allProducts = DBHelper.getAll(Product.class);
+
     }
 
 }

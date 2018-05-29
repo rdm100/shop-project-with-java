@@ -8,6 +8,7 @@
             <th>Size</th>
             <th>Colour</th>
             <th>Range</th>
+            <th></th>
         </tr>
         #foreach($clothes in $clothes)
         <tr>
@@ -16,6 +17,9 @@
             <td>$clothes.getSize()</td>
             <td>$clothes.getColour()</td>
             <td>$clothes.getRange()</td>
+            <td><form  action="/clothes/$clothes.getId()/buy" method="post">
+                <input type = "submit"  value = "Buy" name="id" class ="button center"/>
+            </form></td>
         <tr>
             #end
     </table>
