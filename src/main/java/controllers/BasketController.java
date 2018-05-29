@@ -45,10 +45,10 @@ public class BasketController {
             String loggedInUser = LoginController.getLoggedInUserName(req, res);
             Customer customer = DBCustomer.findCustomerByUsername(loggedInUser);
             Basket customersBasket = customer.getBasket();
+            double amountPaid = customer.getBasket().giveTotal();
             customer.customerPaysForBasket(customersBasket);
-            Order order = new Order(customersBasket.basketGivesAllProductsToCustomer(), customer);
+            Order order = new Order(customersBasket.basketGivesAllProductsToCustomer(), customer, amountPaid);
             customersBasket.clearBasket();
-
             DBHelper.save(customersBasket);
             DBHelper.save(customer);
             DBHelper.save(order);

@@ -24,7 +24,7 @@ public class OrderTest {
         drink2 = new Drink("Pespi", 0.50, 330, 50.0, 0.05 , 40);
         basket.addProducttoBasket(drink1);
         basket.addProducttoBasket(drink2);
-        order = new Order(basket.basketGivesAllProductsToCustomer(), customer);
+        order = new Order(basket.basketGivesAllProductsToCustomer(), customer, basket.giveTotal());
 
     }
 

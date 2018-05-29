@@ -15,13 +15,15 @@ public class Order {
     private int id;
     private List<Product> boughtProducts;
     private Customer customer;
+    private double amountPaid;
 
     public Order() {
     }
 
-    public Order(List<Product> boughtProducts, Customer customer) {
+    public Order(List<Product> boughtProducts, Customer customer, double amountPaid) {
         this.boughtProducts = boughtProducts;
         this.customer = customer;
+        this.amountPaid = amountPaid;
 
     }
 
@@ -76,9 +78,12 @@ public class Order {
         }
 
     }
+    @Column(name = "amount_paid")
+    public double getAmountPaid() {
+        return amountPaid;
+    }
 
-
-
-
-
+    public void setAmountPaid(double amountPaid) {
+        this.amountPaid = amountPaid;
+    }
 }

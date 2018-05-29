@@ -23,6 +23,7 @@ public class ShopController {
         BasketController basketController = new BasketController();
         CustomerController customerController = new CustomerController();
         OrderController orderController = new OrderController();
+        SignUpController signUpController = new SignUpController();
 
         VelocityTemplateEngine velocityTemplateEngine = new VelocityTemplateEngine();
         get("/shop", (req, res) -> {
