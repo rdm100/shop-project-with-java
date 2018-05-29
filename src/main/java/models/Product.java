@@ -102,7 +102,7 @@ public abstract class Product {
 
     public String productType(){
         if(this instanceof Food){
-            return "food"; }
+            return "foods"; }
         if(this instanceof Electrical){
             return "electronics";
         } if(this instanceof Clothing){
