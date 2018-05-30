@@ -71,9 +71,10 @@ margin: 0 auto;
 }
 .containerO {
 position: relative;
-width:300px;
-height:200px;
+
 margin:20px;
+width:450px;
+height:250px;
 }
 .image {
   display: block;
