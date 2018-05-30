@@ -41,8 +41,6 @@ public class BasketController {
 
 
 
-
-
         post("/basket/buy", (req, res) -> {
             String loggedInUser = LoginController.getLoggedInUserName(req, res);
             Customer customer = DBCustomer.findCustomerByUsername(loggedInUser);
