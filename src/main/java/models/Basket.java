@@ -6,7 +6,9 @@ import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Entity
@@ -35,9 +37,12 @@ public class Basket {
         this.id = id;
     }
 
-    @ManyToMany(mappedBy = "baskets")
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(name = "products_in_basket",
+            inverseJoinColumns = {@JoinColumn(name = "product_id", updatable = true)},
+            joinColumns = {@JoinColumn(name = "basket_id", updatable = true)}
+    )
     @LazyCollection(LazyCollectionOption.FALSE)
-
     public List<Product> getProducts() {
         return basket;
     }
@@ -66,14 +71,17 @@ public class Basket {
 
     }
 
-    public void removeProductFromBasket(Product product){
-        this.basket.remove(product);
+    public void removeProductFromBasket(Product product) {
         product.removeBasket(this);
-        DBHelper.save(product);
-        DBHelper.save(this);
+//            List<Product> newBasket = new ArrayList<>();
+//       for (Product foundProduct: this.basket) {
+//           if (foundProduct.getId() != product.getId()) {
+//                newBasket.add(foundProduct);
+
+
+        basket.clear();
 
     }
-
 
 
     public List<Product> basketGivesAllProductsToCustomer(){
@@ -160,5 +168,9 @@ public class Basket {
         }
         this.basket.clear();
         DBHelper.save(this);
+    }
+
+    public void addMulipleProductsToBasket(List<Product> products){
+        this.basket.addAll(products);
     }
 }

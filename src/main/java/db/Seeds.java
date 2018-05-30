@@ -43,7 +43,8 @@ public class Seeds {
 
 
 
-
+        DBHelper.save(customer);
+        DBHelper.save(customer2);
 
         DBHelper.save(drink);
         DBHelper.save(drink2);
@@ -53,8 +54,7 @@ public class Seeds {
 
         DBHelper.save(till);
 
-        DBHelper.save(customer);
-        DBHelper.save(customer2);
+
         DBHelper.save(manager);
 
         customer.getBasket().addProducttoBasket(drink);
@@ -67,8 +67,9 @@ public class Seeds {
 //        DBHelper.save(order);
 //        order.giveProductsToAnOrder();
 //        DBHelper.save(food);
-
-
+        customer.getBasket().removeProductFromBasket(drink);
+        DBHelper.save(customer.getBasket());
+        DBHelper.save(drink);
 
 
         Product foundProduct = DBHelper.find(Product.class, food.getId());

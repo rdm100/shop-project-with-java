@@ -73,11 +73,11 @@ public abstract class Product {
     }
 
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
-    @JoinTable(name = "products_in_basket",
-            joinColumns = {@JoinColumn(name = "product_id")},
-            inverseJoinColumns = {@JoinColumn(name = "basket_id")}
-    )
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "products")
+//    @JoinTable(name = "products_in_basket",
+//            joinColumns = {@JoinColumn(name = "product_id", updatable = true, nullable = false)},
+//            inverseJoinColumns = {@JoinColumn(name = "basket_id", updatable = true, nullable = false)}
+//    )
     @LazyCollection(LazyCollectionOption.FALSE)
     public List<Basket> getBaskets() {
         return baskets;
@@ -91,7 +91,7 @@ public abstract class Product {
 
 
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "products_in_order",
             joinColumns = {@JoinColumn(name = "product_id", nullable = false)},
             inverseJoinColumns = {@JoinColumn(name = "order_id", nullable = false)}
@@ -116,6 +116,9 @@ public abstract class Product {
         DBHelper.save(this);
 
     }
+    public void removeBasket(Basket basket) {
+        this.baskets.remove(basket);
+    }
 
     public String productType(){
         if(this instanceof Food){
@@ -129,9 +132,7 @@ public abstract class Product {
         }return null;
     }
 
-    public void removeBasket(Basket basket) {
-        this.baskets.remove(basket);
-    }
+
 
 
 }
