@@ -31,7 +31,8 @@ public class StockController {
 
             Stock stock = (Stock) DBHelper.getAll(Stock.class).get(0);
             List<Product> products = DBStock.AllProductsBelongingToStock(stock);
-
+            Till till = (Till)DBHelper.getAll(Till.class).get(0);
+            model.put("till", till);
             model.put("products", products);
             model.put("stock", stock);
             model.put("user", loggedInUser);

@@ -1,4 +1,5 @@
 package controllers;
+import db.DBCustomer;
 import db.DBHelper;
 import models.Customer;
 import spark.ModelAndView;
@@ -24,7 +25,9 @@ public class LoginController {
             post("/login", (req, res) -> {
         String inputtedUsername = req.queryParams("username");
         List<Customer> signedUpUsers = DBHelper.getAll(Customer.class);
+//        Customer manager = DBCustomer.findCustomerByUsername("manager");
         for (Customer customer: signedUpUsers){
+
             if(inputtedUsername.equals(customer.getUsername())){
                 res.redirect("/account");
             }

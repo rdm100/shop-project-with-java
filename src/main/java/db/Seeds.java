@@ -21,6 +21,7 @@ public class Seeds {
 
         Customer customer = new Customer("paulkelly20", "Paul", 33, 100);
         Customer customer2 = new Customer("rdm", "Roberto", 39, 20);
+        Customer manager = new Customer("manager", "manager", 40, 10);
 
 
         Calendar bestBefore = Calendar.getInstance();
@@ -59,6 +60,7 @@ public class Seeds {
 
         DBHelper.save(customer);
         DBHelper.save(customer2);
+        DBHelper.save(manager);
         DBHelper.save(basket);
         DBHelper.save(basket2);
         basket.addProducttoBasket(food);
@@ -89,15 +91,11 @@ public class Seeds {
         Customer foundCustomerByUserName = DBCustomer.findCustomerByUsername("rdm");
         List<Product> searchedProducts = DBProduct.productsFromSearch("co");
         List<Product> allProducts = DBHelper.getAll(Product.class);
-        for (int i = 1; i < 5; i++){
-        for(Product product: allProducts){
-            stock.addProductToStock(product);
-            product.setStock(stock);
-            DBHelper.save(product);}
-        }
+
 
         DBHelper.save(stock);
         Stock Findingstock = DBHelper.find(Stock.class, stock.getId() );
+        Customer manager22 = DBCustomer.findCustomerByUsername("manager");
 
 
 
