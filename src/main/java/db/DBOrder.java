@@ -32,19 +32,3 @@ public class DBOrder {
         return foundProducts;
     }
 }
-//
-//
-//    public static List<Team> findTeamsInMatch(Match match){
-//        session = HibernateUtil.getSessionFactory().openSession();
-//        List<Team> foundTeams = null;
-//        try{
-//            Criteria cr = session.createCriteria(Team.class);
-//            cr.createAlias("matches", "match");
-//            cr.add(Restrictions.eq("match.id", match.getId()));
-//            foundTeams = cr.list();
-//        }catch (HibernateException e){
-//            e.printStackTrace();
-//        }finally {
-//            session.close();
-//        } return foundTeams;
-//    }
