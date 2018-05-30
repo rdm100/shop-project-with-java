@@ -44,18 +44,38 @@ public class BasketController {
         post("/basket/buy", (req, res) -> {
             String loggedInUser = LoginController.getLoggedInUserName(req, res);
             Customer customer = DBCustomer.findCustomerByUsername(loggedInUser);
+            Till till = (Till)DBHelper.getAll(Till.class).get(0);
             Basket customersBasket = customer.getBasket();
             double amountPaid = customer.getBasket().giveTotal();
             Order order = new Order(customersBasket.getProducts(), customer, amountPaid);
-            customer.customerPaysForBasket(customersBasket);
             DBHelper.save(order);
-            customersBasket.clearBasket();
+            order.setProductToOrder();
+            till.sellBasketToCustomer(customer);
+            DBHelper.save(order);
             DBHelper.save(customersBasket);
+            DBHelper.save(till);
             DBHelper.save(customer);
 
             res.redirect("/account");
             return null;
         }, new VelocityTemplateEngine());
+
+
+        post("/basket/:id/remove", (req, res) -> {
+            String strId = req.params("id");
+            Integer intId = Integer.parseInt(strId);
+            String loggedInUser = LoginController.getLoggedInUserName(req, res);
+            Customer customer = DBCustomer.findCustomerByUsername(loggedInUser);
+            Product product = DBHelper.find(Product.class, intId);
+            customer.getBasket().removeProductFromBasket(product);
+            DBHelper.save(customer.getBasket());
+            DBHelper.save(product);
+
+            res.redirect("/basket");
+            return null;
+        }, new VelocityTemplateEngine());
+
+
     }
 
 

@@ -20,7 +20,8 @@ public class DBBasket {
         List<Product> products = null;
         try {
             Criteria cr = session.createCriteria(Product.class);
-            cr.add(Restrictions.eq("basket", basket));
+            cr.createAlias("baskets", "basket");
+            cr.add(Restrictions.eq("basket.id", basket.getId()));
             products = cr.list();
         } catch (HibernateException e) {
             e.printStackTrace();
@@ -30,3 +31,5 @@ public class DBBasket {
         return products;
     }
 }
+
+

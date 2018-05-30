@@ -7,7 +7,7 @@ import static junit.framework.Assert.assertEquals;
 public class BasketTest {
 
 
-    Stock stock;
+
     Product drink1;
     Product drink2;
     Basket basket;
@@ -15,13 +15,10 @@ public class BasketTest {
 
     @Before
     public void setUp() throws Exception {
-        stock = new Stock();
-        stock.addProductToStock(drink1);
-        stock.addProductToStock(drink2);
         customer = new Customer("rdm", "Roberto", 39, 10000);
-        basket = new Basket(customer);
-        drink1 = new Drink("Coke", 0.50,stock,  330, 50.0, 0.05 , 40);
-        drink2 = new Drink("Pespi", 0.50,stock,  330, 50.0, 0.05 , 40);
+        basket = customer.getBasket();
+        drink1 = new Drink("Coke", 0.50,4,  330, 50.0, 0.05 , 40);
+        drink2 = new Drink("Pespi", 0.50,4,  330, 50.0, 0.05 , 40);
         basket.addProducttoBasket(drink1);
         basket.addProducttoBasket(drink2);
 
@@ -39,7 +36,7 @@ public class BasketTest {
 
     @Test
     public void canRemoveFromBasket() {
-        basket.removeProducttoBasket(drink1);
+        basket.removeProductFromBasket(drink1);
         assertEquals(1, basket.countProductsInBasket());
     }
 
@@ -56,13 +53,6 @@ public class BasketTest {
         assertEquals(1.00, basket.giveTotal() );
     }
 
-    @Test
-    public void discountWithProductOverFiftyPounds(){
-        Product electrical = new Electrical("Laptop", 1000,stock,  "Dell XPS", "Silver");
-        stock.addProductToStock(electrical);
-        basket.addProducttoBasket(electrical);
-        assertEquals(991, basket.giveTotal(), 0);
-    }
 
     @Test
     public void emptyBasket() {

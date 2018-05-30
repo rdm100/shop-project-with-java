@@ -1,10 +1,14 @@
 package models;
 
 import db.DBHelper;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Entity
@@ -15,12 +19,11 @@ public class Basket {
     private Customer customer;
 
 
-    public Basket() {
-    }
 
-    public Basket(Customer customer) {
+
+    public Basket() {
         this.basket = new ArrayList<>();
-        this.customer = customer;
+
     }
 
     @Id
@@ -34,7 +37,12 @@ public class Basket {
         this.id = id;
     }
 
-    @OneToMany(mappedBy = "basket", fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(name = "products_in_basket",
+            inverseJoinColumns = {@JoinColumn(name = "product_id", updatable = true)},
+            joinColumns = {@JoinColumn(name = "basket_id", updatable = true)}
+    )
+    @LazyCollection(LazyCollectionOption.FALSE)
     public List<Product> getProducts() {
         return basket;
     }
@@ -58,20 +66,22 @@ public class Basket {
 
     public void addProducttoBasket(Product product){
         this.basket.add(product);
-        product.setBasket(this);
-        DBHelper.save(product);
-
-
-    }
-
-    public void removeProducttoBasket(Product product){
-        this.basket.remove(product);
-        product.setBasket(this);
-        DBHelper.save(product);
+        product.addBaskettoProduct(this);
         DBHelper.save(this);
 
     }
 
+    public void removeProductFromBasket(Product product) {
+        product.removeBasket(this);
+//            List<Product> newBasket = new ArrayList<>();
+//       for (Product foundProduct: this.basket) {
+//           if (foundProduct.getId() != product.getId()) {
+//                newBasket.add(foundProduct);
+
+
+        basket.clear();
+
+    }
 
 
     public List<Product> basketGivesAllProductsToCustomer(){
@@ -84,10 +94,6 @@ public class Basket {
 
     }
 
-    public void allBasketItemsGoBackIntoStock(Stock stock){
-        stock.addMulitpleThingsToStock(this.basket);
-        this.basket.clear();
-    }
 
     public double calculateTotalCostOfAllItemsInBasket(){
         double result = 0;
@@ -157,9 +163,14 @@ public class Basket {
 
     public void clearBasket(){
         for(Product product: basket){
-            product.setBasket(null);
+            product.removeBasket(this);
             DBHelper.save(product);
         }
         this.basket.clear();
+        DBHelper.save(this);
+    }
+
+    public void addMulipleProductsToBasket(List<Product> products){
+        this.basket.addAll(products);
     }
 }

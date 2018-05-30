@@ -6,7 +6,8 @@
             <th>Id</th>
             <th>Name</th>
             <th>Price</th>
-            <th>Quantity</th>
+            <th></th>
+
 
         </tr>
         #foreach($product in $products)
@@ -14,8 +15,9 @@
             <td>$product.getId()</td>
             <td>$product.getName()</td>
             <td>$product.getPrice()</td>
-            <td>$product.getBasket().getQuantityOfProductInBasket($product)</td>
-
+            <td><form action="/basket/$product.getId()/remove" method="post">
+                <input type="submit" value="Remove" class="button center">
+            </form></td>
 
         <tr>
             #end

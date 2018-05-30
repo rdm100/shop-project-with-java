@@ -15,12 +15,12 @@ public class Drink extends Product {
     public Drink() {
     }
 
-    public Drink(String name, double price,  Stock stock, int volume, double sugarContent, double alcoholContent, int caffeineContent) {
-        super(name, price, stock);
+    public Drink(String name, double price, int quantity, int volume, double sugarContent, double alcholContent, int caffineContent) {
+        super(name, price, quantity);
         this.volume = volume;
         this.sugarContent = sugarContent;
-        this.alcholContent = alcoholContent;
-        this.caffineContent = caffeineContent;
+        this.alcholContent = alcholContent;
+        this.caffineContent = caffineContent;
     }
 
     @Column

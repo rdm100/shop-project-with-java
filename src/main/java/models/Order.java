@@ -38,7 +38,8 @@ public class Order {
         this.id = id;
     }
 
-    @ManyToMany(mappedBy = "orders", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "orders")
+    @LazyCollection(LazyCollectionOption.FALSE)
     public List<Product> getProducts() {
         return boughtProducts;
     }
@@ -73,6 +74,7 @@ public class Order {
         DBHelper.save(this);
         for (Product product: this.boughtProducts){
             product.addOrdertoProduct(this);
+            DBHelper.save(product);
 
         }
 

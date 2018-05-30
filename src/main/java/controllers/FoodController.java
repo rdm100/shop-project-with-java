@@ -79,17 +79,6 @@ public class FoodController {
             String loggedInUser = LoginController.getLoggedInUserName(req, res);
             Product product = DBHelper.find(Product.class, intId);
             Customer customer = DBCustomer.findCustomerByUsername(loggedInUser);
-            if(customer.getBasket() == null){
-                Basket basket = new Basket(customer);
-                customer.setBasket(basket);
-                basket.setCustomer(customer);
-                DBHelper.save(customer);
-                DBHelper.save(basket);
-            }
-            if(customer.getBasket().getCustomer() == null){
-                customer.getBasket().setCustomer(customer);
-                DBHelper.save(customer.getBasket());
-            }
             customer.getBasket().addProducttoBasket(product);
             res.redirect("/basket");
             return null;
@@ -101,6 +90,7 @@ public class FoodController {
             Food food = DBHelper.find(Food.class, intId);
             String name = req.queryParams("name");
             double price = Double.parseDouble(req.queryParams("price"));
+            int quantity = Integer.parseInt(req.queryParams("quantity"));
             String bestBefore = req.queryParams("bestBefore");
             String pattern = "dd-MM-yyyy";
             Date date = new SimpleDateFormat(pattern).parse(bestBefore, new ParsePosition(0));
@@ -110,6 +100,7 @@ public class FoodController {
             int calories = Integer.parseInt(req.queryParams("calories"));
             food.setName(name);
             food.setPrice(price);
+            food.setQuantity(quantity);
             food.setBestBefore(calendar);
             food.setOrigin(origin);
             food.setCalories(calories);
@@ -130,9 +121,10 @@ public class FoodController {
 
 
         post ("/foods", (req, res) ->{
-            Stock stock = (Stock)DBHelper.getAll(Stock.class).get(0);
             String name = req.queryParams("name");
             double price = Double.parseDouble(req.queryParams("price"));
+            int quantity = Integer.parseInt(req.queryParams("quantity"));
+
             String bestBefore = req.queryParams("bestBefore");
             String pattern = "dd-MM-yyyy";
             Date date = new SimpleDateFormat(pattern).parse(bestBefore, new ParsePosition(0));
@@ -140,7 +132,7 @@ public class FoodController {
             calendar.setTime(date);
             String origin = req.queryParams("origin");
             int calories = Integer.parseInt(req.queryParams("calories"));
-            Food food = new Food(name, price,stock,  calendar, origin, calories);
+            Food food = new Food(name, price,quantity,  calendar, origin, calories);
             DBHelper.save(food);
             res.redirect("/stock");
             return null;

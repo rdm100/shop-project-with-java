@@ -24,6 +24,8 @@ public class Customer {
         this.username = username;
         this.name = name;
         this.age = age;
+        this.basket = new Basket();
+        basket.setCustomer(this);
         this.wallet = wallet;
         this.products = new ArrayList<>();
         this.orders = new ArrayList<>();
@@ -95,8 +97,9 @@ public class Customer {
     public void addBasketToCustomerProducts(List<Product> products){
         this.products.addAll(products);
     }
+
     public boolean customerCanAffordShopping(Basket basket){
-    if(getWallet() > basket.calculateTotalCostOfAllItemsInBasket())
+    if(getWallet() > basket.giveTotal())
     {return true;}
     return false;
     }
@@ -109,7 +112,7 @@ public class Customer {
             return  total;
         } return 0;
     }
-    @OneToOne(mappedBy = "customer", fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+    @OneToOne(mappedBy = "customer", cascade=CascadeType.ALL)
     public Basket getBasket() {
         return basket;
     }
