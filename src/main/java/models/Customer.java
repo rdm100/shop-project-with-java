@@ -97,8 +97,9 @@ public class Customer {
     public void addBasketToCustomerProducts(List<Product> products){
         this.products.addAll(products);
     }
+
     public boolean customerCanAffordShopping(Basket basket){
-    if(getWallet() > basket.calculateTotalCostOfAllItemsInBasket())
+    if(getWallet() > basket.giveTotal())
     {return true;}
     return false;
     }

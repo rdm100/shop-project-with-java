@@ -44,13 +44,15 @@ public class BasketController {
         post("/basket/buy", (req, res) -> {
             String loggedInUser = LoginController.getLoggedInUserName(req, res);
             Customer customer = DBCustomer.findCustomerByUsername(loggedInUser);
+            Till till = (Till)DBHelper.getAll(Till.class).get(0);
             Basket customersBasket = customer.getBasket();
             double amountPaid = customer.getBasket().giveTotal();
             Order order = new Order(customersBasket.getProducts(), customer, amountPaid);
-            customer.customerPaysForBasket(customersBasket);
+            till.sellBasketToCustomer(customer);
             DBHelper.save(order);
-            customersBasket.clearBasket();
+//            customersBasket.clearBasket();
             DBHelper.save(customersBasket);
+            DBHelper.save(till);
             DBHelper.save(customer);
 
             res.redirect("/account");
