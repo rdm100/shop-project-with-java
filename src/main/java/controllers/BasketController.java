@@ -41,6 +41,20 @@ public class BasketController {
 
 
 
+        post("/basket/:id", (req, res) -> {
+            String strId = req.params("id");
+            Integer intId = Integer.parseInt(strId);
+            String loggedInUser = LoginController.getLoggedInUserName(req, res);
+            Customer customer = DBCustomer.findCustomerByUsername(loggedInUser);
+            Basket customersBasket = customer.getBasket();
+            Product product = DBHelper.find(Product.class, intId);
+            customersBasket.removeProductFromBasket(product);
+            DBHelper.save(customer);
+            res.redirect("/account");
+            return null;
+        }, new VelocityTemplateEngine());
+
+
         post("/basket/buy", (req, res) -> {
             String loggedInUser = LoginController.getLoggedInUserName(req, res);
             Customer customer = DBCustomer.findCustomerByUsername(loggedInUser);
@@ -58,6 +72,8 @@ public class BasketController {
             res.redirect("/account");
             return null;
         }, new VelocityTemplateEngine());
+
+
     }
 
 

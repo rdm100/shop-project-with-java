@@ -66,7 +66,7 @@ public class Basket {
 
     }
 
-    public void removeProducttoBasket(Product product){
+    public void removeProductFromBasket(Product product){
         this.basket.remove(product);
         product.removeBasket(this);
         DBHelper.save(product);
