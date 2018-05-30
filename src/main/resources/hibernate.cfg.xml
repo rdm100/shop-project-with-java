@@ -15,7 +15,6 @@
         <property name="show_sql">true</property>
         <mapping class = "models.Basket"/>
         <mapping class = "models.Till"/>
-        <mapping class = "models.Stock"/>
         <mapping class = "models.Product"/>
         <mapping class = "models.Customer"/>
         <mapping class = "models.Clothing"/>

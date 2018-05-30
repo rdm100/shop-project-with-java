@@ -80,17 +80,17 @@ public class ElectronicsController {
             String loggedInUser = LoginController.getLoggedInUserName(req, res);
             Product product = DBHelper.find(Product.class, intId);
             Customer customer = DBCustomer.findCustomerByUsername(loggedInUser);
-            if(customer.getBasket() == null){
-                Basket basket = new Basket(customer);
-                customer.setBasket(basket);
-                basket.setCustomer(customer);
-                DBHelper.save(customer);
-                DBHelper.save(basket);
-            }
-            if(customer.getBasket().getCustomer() == null){
-                customer.getBasket().setCustomer(customer);
-                DBHelper.save(customer.getBasket());
-            }
+//            if(customer.getBasket() == null){
+//                Basket basket = new Basket(customer);
+//                customer.setBasket(basket);
+//                basket.setCustomer(customer);
+//                DBHelper.save(customer);
+//                DBHelper.save(basket);
+//            }
+//            if(customer.getBasket().getCustomer() == null){
+//                customer.getBasket().setCustomer(customer);
+//                DBHelper.save(customer.getBasket());
+//            }
             customer.getBasket().addProducttoBasket(product);
             res.redirect("/basket");
             return null;
@@ -101,11 +101,13 @@ public class ElectronicsController {
             Integer intId = Integer.parseInt(strId);
             Electrical electrical = DBHelper.find(Electrical.class, intId);
             String name = req.queryParams("name");
+            int quantity = Integer.parseInt(req.queryParams("quantity"));
             double price = Double.parseDouble(req.queryParams("price"));
             String model = req.queryParams("model");
             String colour = req.queryParams("colour");
             electrical.setName(name);
             electrical.setPrice(price);
+            electrical.setQuantity(quantity);
             electrical.setModel(model);
             electrical.setColour(colour);
             DBHelper.save(electrical);
@@ -125,13 +127,14 @@ public class ElectronicsController {
 
 
         post ("/electronics", (req, res) ->{
-            Stock stock = (Stock)DBHelper.getAll(Stock.class).get(0);
 
             String name = req.queryParams("name");
             double price = Double.parseDouble(req.queryParams("price"));
             String model = req.queryParams("model");
             String colour = req.queryParams("colour");
-            Electrical electrical = new Electrical(name, price,stock,  model, colour);
+            int quantity = Integer.parseInt(req.queryParams("quantity"));
+
+            Electrical electrical = new Electrical(name, price,quantity,  model, colour);
             DBHelper.save(electrical);
             res.redirect("/stock");
             return null;

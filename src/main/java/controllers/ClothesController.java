@@ -59,17 +59,17 @@ public class ClothesController {
             String loggedInUser = LoginController.getLoggedInUserName(req, res);
             Product product = DBHelper.find(Product.class, intId);
             Customer customer = DBCustomer.findCustomerByUsername(loggedInUser);
-            if (customer.getBasket() == null) {
-                Basket basket = new Basket(customer);
-                customer.setBasket(basket);
-                basket.setCustomer(customer);
-                DBHelper.save(customer);
-                DBHelper.save(basket);
-            }
-            if (customer.getBasket().getCustomer() == null) {
-                customer.getBasket().setCustomer(customer);
-                DBHelper.save(customer.getBasket());
-            }
+//            if (customer.getBasket() == null) {
+//                Basket basket = new Basket(customer);
+//                customer.setBasket(basket);
+//                basket.setCustomer(customer);
+//                DBHelper.save(customer);
+//                DBHelper.save(basket);
+//            }
+//            if (customer.getBasket().getCustomer() == null) {
+//                customer.getBasket().setCustomer(customer);
+//                DBHelper.save(customer.getBasket());
+//            }
             customer.getBasket().addProducttoBasket(product);
             res.redirect("/basket");
             return null;
@@ -84,13 +84,13 @@ public class ClothesController {
         }, new VelocityTemplateEngine());
 
         post ("/clothes", (req, res) ->{
-            Stock stock = (Stock)DBHelper.getAll(Stock.class).get(0);
             String name = req.queryParams("name");
             double price = Double.parseDouble(req.queryParams("price"));
+            int quantity = Integer.parseInt(req.queryParams("price"));
             String size = req.queryParams("size");
             String colour = req.queryParams("colour");
             String range = req.queryParams("range");
-            Clothing clothing = new Clothing(name, price, stock, size, colour, range);
+            Clothing clothing = new Clothing(name, price, quantity, size, colour, range);
             DBHelper.save(clothing);
             res.redirect("/stock");
             return null;
@@ -104,12 +104,14 @@ public class ClothesController {
             Clothing clothing = DBHelper.find(Clothing.class, intId);
             String name = req.queryParams("name");
             double price = Double.parseDouble(req.queryParams("price"));
+            int quantity = Integer.parseInt(req.queryParams("quantity"));
             String size = req.queryParams("size");
             String colour = req.queryParams("colour");
             String range = req.queryParams("range");
             clothing.setName(name);
             clothing.setPrice(price);
             clothing.setSize(size);
+            clothing.setQuantity(quantity);
             clothing.setColour(colour);
             clothing.setRange(range);
             DBHelper.save(clothing);

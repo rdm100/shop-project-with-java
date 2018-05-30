@@ -1,6 +1,8 @@
 package models;
 
 import db.DBHelper;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -15,12 +17,11 @@ public class Basket {
     private Customer customer;
 
 
-    public Basket() {
-    }
 
-    public Basket(Customer customer) {
+
+    public Basket() {
         this.basket = new ArrayList<>();
-        this.customer = customer;
+
     }
 
     @Id
@@ -34,7 +35,9 @@ public class Basket {
         this.id = id;
     }
 
-    @OneToMany(mappedBy = "basket", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "baskets")
+    @LazyCollection(LazyCollectionOption.FALSE)
+
     public List<Product> getProducts() {
         return basket;
     }
@@ -58,15 +61,14 @@ public class Basket {
 
     public void addProducttoBasket(Product product){
         this.basket.add(product);
-        product.setBasket(this);
-        DBHelper.save(product);
-
+        product.addBaskettoProduct(this);
+        DBHelper.save(this);
 
     }
 
     public void removeProducttoBasket(Product product){
         this.basket.remove(product);
-        product.setBasket(this);
+        product.removeBasket(this);
         DBHelper.save(product);
         DBHelper.save(this);
 
@@ -84,10 +86,6 @@ public class Basket {
 
     }
 
-    public void allBasketItemsGoBackIntoStock(Stock stock){
-        stock.addMulitpleThingsToStock(this.basket);
-        this.basket.clear();
-    }
 
     public double calculateTotalCostOfAllItemsInBasket(){
         double result = 0;
@@ -157,9 +155,10 @@ public class Basket {
 
     public void clearBasket(){
         for(Product product: basket){
-            product.setBasket(null);
+            product.removeBasket(this);
             DBHelper.save(product);
         }
         this.basket.clear();
+        DBHelper.save(this);
     }
 }

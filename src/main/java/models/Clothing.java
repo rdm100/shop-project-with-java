@@ -14,13 +14,13 @@ public class Clothing extends Product {
     public Clothing() {
     }
 
-    public Clothing(String name, double price, Stock stock,String size, String colour, String range) {
-        super(name, price, stock);
+
+    public Clothing(String name, double price, int quantity, String size, String colour, String range) {
+        super(name, price, quantity);
         this.size = size;
         this.colour = colour;
         this.range = range;
     }
-
 
     @Column
     public String getSize() {

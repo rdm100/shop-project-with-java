@@ -80,12 +80,14 @@ public class DrinksController {
         String name = req.queryParams("name");
         double price = Double.parseDouble(req.queryParams("price"));
         int volume = Integer.parseInt(req.queryParams("volume"));
+        int quantity = Integer.parseInt(req.queryParams("quantity"));
         double sugarContent = Double.parseDouble(req.queryParams("sugarContent"));
         double alcholContent = Double.parseDouble(req.queryParams("alcoholContent"));
         int caffeineContent = Integer.parseInt(req.queryParams("caffeineContent"));
         drink.setName(name);
         drink.setPrice(price);
         drink.setVolume(volume);
+        drink.setQuantity(quantity);
         drink.setAlcholContent(alcholContent);
         drink.setSugarContent(sugarContent);
         drink.setCaffineContent(caffeineContent);
@@ -111,31 +113,33 @@ public class DrinksController {
             String loggedInUser = LoginController.getLoggedInUserName(req, res);
             Product product = DBHelper.find(Product.class, intId);
             Customer customer = DBCustomer.findCustomerByUsername(loggedInUser);
-            if(customer.getBasket() == null){
-                Basket basket = new Basket(customer);
-                customer.setBasket(basket);
-                basket.setCustomer(customer);
-                DBHelper.save(customer);
-                DBHelper.save(basket);
-            }
-            if(customer.getBasket().getCustomer() == null){
-                customer.getBasket().setCustomer(customer);
-                DBHelper.save(customer.getBasket());
-            }
+//            if(customer.getBasket() == null){
+//                Basket basket = new Basket(customer);
+//                customer.setBasket(basket);
+//                basket.setCustomer(customer);
+//                DBHelper.save(customer);
+//                DBHelper.save(basket);
+//            }
+//            if(customer.getBasket().getCustomer() == null){
+//                customer.getBasket().setCustomer(customer);
+//                DBHelper.save(customer.getBasket());
+//            }
             customer.getBasket().addProducttoBasket(product);
+            DBHelper.save(customer.getBasket());
+
             res.redirect("/basket");
             return null;
         }, new VelocityTemplateEngine());
 
         post ("/drinks", (req, res) ->{
-            Stock stock = (Stock)DBHelper.getAll(Stock.class).get(0);
             String name = req.queryParams("name");
             double price = Double.parseDouble(req.queryParams("price"));
             int volume = Integer.parseInt(req.queryParams("volume"));
+            int quantity = Integer.parseInt(req.queryParams("quantity"));
             double sugarContent = Double.parseDouble(req.queryParams("sugarContent"));
             double alcholContent = Double.parseDouble(req.queryParams("alcoholContent"));
             int caffeineContent = Integer.parseInt(req.queryParams("caffeineContent"));
-            Drink drink = new Drink(name, price,stock,  volume, sugarContent, alcholContent, caffeineContent);
+            Drink drink = new Drink(name, price,quantity,  volume, sugarContent, alcholContent, caffeineContent);
             DBHelper.save(drink);
             res.redirect("/stock");
             return null;

@@ -18,7 +18,7 @@
 
             <td>$product.getName()</td>
             <td>$product.getPrice()</td>
-            <td>$stock.getQuantityOfProduct($product)</td>
+            <td>$product.getQuantity()</td>
             <td><a href="/$product.productType()/$product.getId()/edit" class="button center">Edit</a></td>
             <td>     <form action="/$product.productType()/$product.getId()/delete" method="post">
                 <input type="submit" value="Delete" class="button center">

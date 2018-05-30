@@ -4,6 +4,8 @@ import db.DBHelper;
 import javassist.expr.Instanceof;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -15,18 +17,20 @@ public abstract class Product {
     private int id;
     private String name;
     private double price;
-    private Basket basket;
-    private Stock stock;
+    private List<Basket> baskets;
+    private int quantity;
     private List<Order> orders;
 
     public Product() {
     }
 
-    public Product(String name, double price, Stock stock) {
+    public Product(String name, double price, int quantity) {
         this.name = name;
         this.price = price;
+        this.quantity = quantity;
+        this.baskets = new ArrayList<>();
         this.orders = new ArrayList<>();
-        this.stock = stock;
+
 
     }
 
@@ -59,34 +63,40 @@ public abstract class Product {
         this.price = price;
     }
 
-
-    @ManyToOne(cascade=CascadeType.PERSIST)
-    @JoinColumn(name ="basket_id")
-    public Basket getBasket() {
-        return basket;
+    @Column
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setBasket(Basket basket) {
-        this.basket = basket;
-    }
-
-    @ManyToOne(cascade=CascadeType.PERSIST)
-    @JoinColumn(name ="stock_id")
-    public Stock getStock() {
-        return stock;
-    }
-
-    public void setStock(Stock stock) {
-        this.stock = stock;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
 
     @ManyToMany(cascade = CascadeType.PERSIST)
-    @JoinTable(name = "products_in_order",
+    @JoinTable(name = "products_in_basket",
             joinColumns = {@JoinColumn(name = "product_id")},
-            inverseJoinColumns = {@JoinColumn(name = "order_id")}
+            inverseJoinColumns = {@JoinColumn(name = "basket_id")}
     )
-    @Fetch(FetchMode.SUBSELECT)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    public List<Basket> getBaskets() {
+        return baskets;
+    }
+
+    public void setBaskets(List<Basket> baskets) {
+        this.baskets = baskets;
+    }
+
+
+
+
+
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(name = "products_in_order",
+            joinColumns = {@JoinColumn(name = "product_id", nullable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "order_id", nullable = false)}
+    )
+    @LazyCollection(LazyCollectionOption.FALSE)
     public List<Order> getOrders() {
         return orders;
     }
@@ -97,6 +107,13 @@ public abstract class Product {
 
     public void addOrdertoProduct(Order order){
         this.orders.add(order);
+
+    }
+
+
+    public void addBaskettoProduct(Basket basket){
+        this.baskets.add(basket);
+        DBHelper.save(this);
 
     }
 
@@ -111,4 +128,10 @@ public abstract class Product {
             return "drinks";
         }return null;
     }
+
+    public void removeBasket(Basket basket) {
+        this.baskets.remove(basket);
+    }
+
+
 }

@@ -38,7 +38,8 @@ public class Order {
         this.id = id;
     }
 
-    @ManyToMany(mappedBy = "orders", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "orders")
+    @LazyCollection(LazyCollectionOption.FALSE)
     public List<Product> getProducts() {
         return boughtProducts;
     }
