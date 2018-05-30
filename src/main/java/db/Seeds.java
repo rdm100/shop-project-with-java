@@ -71,13 +71,9 @@ public class Seeds {
 
 
 
-
-//        Order foundOrder = DBHelper.find(Order.class, order.getId());
         Product foundProduct = DBHelper.find(Product.class, food.getId());
 
-//        List<Order> orders = DBCustomer.AllOrdersBelongingToACustomer(customer);
         List<Product> productsFromBasket = DBBasket.AllProductsInABasket(customer.getBasket());
-//        List<Product> productsFromOrder = DBOrder.findProductsInOrder(order);
         Customer foundCustomerByUserName = DBCustomer.findCustomerByUsername("paulkelly20");
         List<Product> searchedProducts = DBProduct.productsFromSearch("co");
         List<Product> allProducts = DBHelper.getAll(Product.class);

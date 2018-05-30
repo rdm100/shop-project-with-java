@@ -74,6 +74,7 @@ public class Order {
         DBHelper.save(this);
         for (Product product: this.boughtProducts){
             product.addOrdertoProduct(this);
+            DBHelper.save(product);
 
         }
 

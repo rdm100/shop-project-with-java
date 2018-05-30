@@ -41,18 +41,6 @@ public class BasketController {
 
 
 
-        post("/basket/:id", (req, res) -> {
-            String strId = req.params("id");
-            Integer intId = Integer.parseInt(strId);
-            String loggedInUser = LoginController.getLoggedInUserName(req, res);
-            Customer customer = DBCustomer.findCustomerByUsername(loggedInUser);
-            Basket customersBasket = customer.getBasket();
-            Product product = DBHelper.find(Product.class, intId);
-            customersBasket.removeProductFromBasket(product);
-            DBHelper.save(customer);
-            res.redirect("/account");
-            return null;
-        }, new VelocityTemplateEngine());
 
 
         post("/basket/buy", (req, res) -> {
@@ -62,13 +50,28 @@ public class BasketController {
             Basket customersBasket = customer.getBasket();
             double amountPaid = customer.getBasket().giveTotal();
             Order order = new Order(customersBasket.getProducts(), customer, amountPaid);
+            DBHelper.save(order);
+            order.setProductToOrder();
             till.sellBasketToCustomer(customer);
             DBHelper.save(order);
-//            customersBasket.clearBasket();
             DBHelper.save(customersBasket);
             DBHelper.save(till);
             DBHelper.save(customer);
 
+            res.redirect("/account");
+            return null;
+        }, new VelocityTemplateEngine());
+
+
+        post("/basket/:id", (req, res) -> {
+            String strId = req.params("id");
+            Integer intId = Integer.parseInt(strId);
+            String loggedInUser = LoginController.getLoggedInUserName(req, res);
+            Customer customer = DBCustomer.findCustomerByUsername(loggedInUser);
+            Basket customersBasket = customer.getBasket();
+            Product product = DBHelper.find(Product.class, intId);
+            customersBasket.removeProductFromBasket(product);
+            DBHelper.save(customer);
             res.redirect("/account");
             return null;
         }, new VelocityTemplateEngine());

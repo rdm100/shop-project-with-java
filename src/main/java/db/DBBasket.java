@@ -31,20 +31,5 @@ public class DBBasket {
         return products;
     }
 }
-//
-//    public static List<Team> findTeamsInCompetition(Competition competition){
-//        session = HibernateUtil.getSessionFactory().openSession();
-//        List<Team> foundTeams = null;
-//        try{
-//            Criteria cr = session.createCriteria(Team.class, "team");
-//            cr.createAlias("competitions", "competition");
-//            cr.add(Restrictions.eq("competition.id", competition.getId()));
-//
-//            foundTeams = cr.list();
-//        }catch (HibernateException e){
-//            e.printStackTrace();
-//        }finally {
-//            session.close();
-//        } return foundTeams;
-//    }
+
 

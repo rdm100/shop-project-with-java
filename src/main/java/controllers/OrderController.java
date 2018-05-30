@@ -46,7 +46,7 @@ public class OrderController {
         Order order = DBHelper.find(Order.class, intId);
         List<Product> products = DBOrder.findProductsInOrder(order);
         model.put("products", products);
-        model.put("template", "templates/orders/show.vtl");
+        model.put("template", "templates/orders/order.vtl");
         return new ModelAndView(model, "templates/layout.vtl");
 
     }, new VelocityTemplateEngine());
