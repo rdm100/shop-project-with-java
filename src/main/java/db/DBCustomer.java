@@ -13,8 +13,6 @@ public class DBCustomer {
 
     private static Session session;
 
-
-
     public static List<Order> AllOrdersBelongingToACustomer(Customer customer) {
         session = HibernateUtil.getSessionFactory().openSession();
         List<Order> orders = null;

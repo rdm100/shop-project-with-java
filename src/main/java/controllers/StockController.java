@@ -27,8 +27,6 @@ public class StockController {
         get("/stock", (req, res) -> {
             HashMap<String, Object> model = new HashMap<>();
             String loggedInUser = LoginController.getLoggedInUserName(req, res);
-
-
             List<Product> products = DBHelper.getAll(Product.class);
             Till till = (Till)DBHelper.getAll(Till.class).get(0);
             model.put("products", products);

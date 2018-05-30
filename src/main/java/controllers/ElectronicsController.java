@@ -38,14 +38,12 @@ public class ElectronicsController {
         get("/electronics/:id/edit", (req, res) -> {
             String strId = req.params(":id");
             Integer intId = Integer.parseInt(strId);
-
             Electrical electrical = DBHelper.find(Product.class, intId);
             Map<String, Object> model = new HashMap<>();
             String loggedInUser = LoginController.getLoggedInUserName(req, res);
             model.put("user", loggedInUser);
             model.put("electrical", electrical);
             model.put("template", "templates/electronics/edit.vtl");
-
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
@@ -68,7 +66,6 @@ public class ElectronicsController {
             model.put("user", loggedInUser);
             model.put("electrical", electrical);
             model.put("template","templates/electronics/show.vtl");
-
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
@@ -80,18 +77,8 @@ public class ElectronicsController {
             String loggedInUser = LoginController.getLoggedInUserName(req, res);
             Product product = DBHelper.find(Product.class, intId);
             Customer customer = DBCustomer.findCustomerByUsername(loggedInUser);
-//            if(customer.getBasket() == null){
-//                Basket basket = new Basket(customer);
-//                customer.setBasket(basket);
-//                basket.setCustomer(customer);
-//                DBHelper.save(customer);
-//                DBHelper.save(basket);
-//            }
-//            if(customer.getBasket().getCustomer() == null){
-//                customer.getBasket().setCustomer(customer);
-//                DBHelper.save(customer.getBasket());
-//            }
             customer.getBasket().addProducttoBasket(product);
+            DBHelper.save(product);
             res.redirect("/basket");
             return null;
         }, new VelocityTemplateEngine());

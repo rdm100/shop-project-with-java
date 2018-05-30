@@ -74,10 +74,6 @@ public abstract class Product {
 
 
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "products")
-//    @JoinTable(name = "products_in_basket",
-//            joinColumns = {@JoinColumn(name = "product_id", updatable = true, nullable = false)},
-//            inverseJoinColumns = {@JoinColumn(name = "basket_id", updatable = true, nullable = false)}
-//    )
     @LazyCollection(LazyCollectionOption.FALSE)
     public List<Basket> getBaskets() {
         return baskets;
@@ -86,9 +82,6 @@ public abstract class Product {
     public void setBaskets(List<Basket> baskets) {
         this.baskets = baskets;
     }
-
-
-
 
 
     @ManyToMany(cascade = CascadeType.ALL)
@@ -110,10 +103,8 @@ public abstract class Product {
 
     }
 
-
     public void addBaskettoProduct(Basket basket){
         this.baskets.add(basket);
-        DBHelper.save(this);
 
     }
     public void removeBasket(Basket basket) {

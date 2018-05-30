@@ -60,8 +60,6 @@ public class Order {
         this.customer = customer;
     }
 
-
-
     public int countOfItemsInOrder(){
        return this.boughtProducts.size();
     }
@@ -70,15 +68,6 @@ public class Order {
         this.boughtProducts.addAll(customersBoughtProducts);
     }
 
-    public void giveProductsToAnOrder(){
-        DBHelper.save(this);
-        for (Product product: this.boughtProducts){
-            product.addOrdertoProduct(this);
-            DBHelper.save(product);
-
-        }
-
-    }
     @Column(name = "amount_paid")
     public double getAmountPaid() {
         return amountPaid;

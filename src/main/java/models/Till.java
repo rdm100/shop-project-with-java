@@ -42,18 +42,22 @@ public class Till {
         this.cash += money;
     }
 
+
     public void sellBasketToCustomer(Customer customer){
         Basket basket = customer.getBasket();
         if(customer.customerCanAffordShopping(basket)){
         double total = basket.giveTotal();
         this.addMoneyToTill(total);
-//            customer.addBasketToCustomerProducts(basket.getProducts());
         for(Product product: basket.getProducts()){
-            int currentTotal = product.getQuantity();
-            product.setQuantity(currentTotal - 1);
+            int newTotal = product.getQuantity() - 1;
+            product.setQuantity(newTotal);
+            product.removeBasket(basket);
+
         }
         customer.customerPaysForBasket(basket);
-        List<Product> products =  basket.basketGivesAllProductsToCustomer();}
+        customer.getBasket().clearBasket();
 
+        }
     }
+
 }

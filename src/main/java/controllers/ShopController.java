@@ -34,7 +34,6 @@ public class ShopController {
             return new ModelAndView(model, "templates/layout.vtl");
             }, velocityTemplateEngine);
 
-
         get("shop/results", (req, res) ->{
             HashMap<String, Object> model = new HashMap<>();
             String loggedInUser = LoginController.getLoggedInUserName(req, res);

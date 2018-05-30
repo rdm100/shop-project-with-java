@@ -17,6 +17,8 @@ public class DBHelper {
     private static Transaction transaction;
     private static Session session;
 
+
+
     public static void save(Object object) {
 
         session = HibernateUtil.getSessionFactory().openSession();
@@ -48,7 +50,6 @@ public class DBHelper {
             session.close();
         }
     }
-
 
     public static void delete(Object object) {
         session = HibernateUtil.getSessionFactory().openSession();

@@ -59,18 +59,10 @@ public class ClothesController {
             String loggedInUser = LoginController.getLoggedInUserName(req, res);
             Product product = DBHelper.find(Product.class, intId);
             Customer customer = DBCustomer.findCustomerByUsername(loggedInUser);
-//            if (customer.getBasket() == null) {
-//                Basket basket = new Basket(customer);
-//                customer.setBasket(basket);
-//                basket.setCustomer(customer);
-//                DBHelper.save(customer);
-//                DBHelper.save(basket);
-//            }
-//            if (customer.getBasket().getCustomer() == null) {
-//                customer.getBasket().setCustomer(customer);
-//                DBHelper.save(customer.getBasket());
-//            }
             customer.getBasket().addProducttoBasket(product);
+            DBHelper.save(product);
+            DBHelper.save(customer.getBasket());
+
             res.redirect("/basket");
             return null;
         }, new VelocityTemplateEngine());
@@ -119,7 +111,6 @@ public class ClothesController {
             return null;
 
         },new VelocityTemplateEngine());
-
 
 
         get("/clothes/:id", (req, res) -> {

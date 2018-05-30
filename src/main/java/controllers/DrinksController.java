@@ -114,6 +114,7 @@ public class DrinksController {
             Product product = DBHelper.find(Product.class, intId);
             Customer customer = DBCustomer.findCustomerByUsername(loggedInUser);
             customer.getBasket().addProducttoBasket(product);
+            DBHelper.save(product);
             DBHelper.save(customer.getBasket());
 
             res.redirect("/basket");

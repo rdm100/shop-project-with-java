@@ -25,6 +25,7 @@ public class SignUpController {
             return new ModelAndView(model, "templates/layout.vtl");
         }, velocityTemplateEngine);
 
+
         post("/signup", (req, res) -> {
         String username = req.queryParams("username");
         req.session().attribute("username", username);

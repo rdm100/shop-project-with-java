@@ -48,7 +48,6 @@ public class OrderController {
         model.put("products", products);
         model.put("template", "templates/orders/order.vtl");
         return new ModelAndView(model, "templates/layout.vtl");
-
     }, new VelocityTemplateEngine());
 }
 }

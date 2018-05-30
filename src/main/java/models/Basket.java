@@ -14,16 +14,14 @@ import java.util.stream.Collectors;
 @Entity
 @Table(name = "baskets")
 public class Basket {
+
     private int id;
     private List<Product> basket;
     private Customer customer;
 
 
-
-
     public Basket() {
         this.basket = new ArrayList<>();
-
     }
 
     @Id
@@ -37,6 +35,8 @@ public class Basket {
         this.id = id;
     }
 
+
+
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(name = "products_in_basket",
             inverseJoinColumns = {@JoinColumn(name = "product_id", updatable = true)},
@@ -47,40 +47,38 @@ public class Basket {
         return basket;
     }
 
+
+
     public void setProducts(List<Product> products) {
         this.basket = products;
     }
+
 
     @OneToOne
     public Customer getCustomer() {
         return customer;
     }
 
+
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
+
 
     public int countProductsInBasket(){
         return this.basket.size();
     }
 
+
     public void addProducttoBasket(Product product){
         this.basket.add(product);
         product.addBaskettoProduct(this);
-        DBHelper.save(this);
 
     }
 
     public void removeProductFromBasket(Product product) {
         product.removeBasket(this);
-//            List<Product> newBasket = new ArrayList<>();
-//       for (Product foundProduct: this.basket) {
-//           if (foundProduct.getId() != product.getId()) {
-//                newBasket.add(foundProduct);
-
-
         basket.clear();
-
     }
 
 
@@ -88,10 +86,7 @@ public class Basket {
         ArrayList<Product> customerProducts = new ArrayList<>();
         customerProducts.addAll(basket);
         basket.clear();
-
          return customerProducts;
-
-
     }
 
 
@@ -99,15 +94,9 @@ public class Basket {
         double result = 0;
         for(Product product: basket){
             result += product.getPrice();
-
-
         } return result;
     }
 
-    public void updateCustomerOrderFromBasket(Order order){
-        order.addBasketProductsToOrder(basketGivesAllProductsToCustomer());
-        order.setCustomer(this.customer);
-    }
 
     public double discountAmount() {
         if (calculateTotalCostOfAllItemsInBasket() > 50.00) {
@@ -141,7 +130,7 @@ public class Basket {
 
            }return twoForOneDiscount;
 
-        }
+    }
 
 
 
@@ -170,7 +159,4 @@ public class Basket {
         DBHelper.save(this);
     }
 
-    public void addMulipleProductsToBasket(List<Product> products){
-        this.basket.addAll(products);
-    }
 }

@@ -51,16 +51,4 @@ public class LoginController {
         return username;
     }
 
-
-//
-
-//
-//        get("/logout", (req, res) ->{
-//        req.session().removeAttribute("username");
-//        res.redirect("/");
-//        return null;
-//
-//        }, new VelocityTemplateEngine());
-//
-//        }
 }

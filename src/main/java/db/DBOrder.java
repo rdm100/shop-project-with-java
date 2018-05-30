@@ -16,7 +16,6 @@ public class DBOrder {
 
     private static Session session;
 
-
     public static List<Product> findProductsInOrder(Order order) {
         session = HibernateUtil.getSessionFactory().openSession();
         List<Product> foundProducts = null;

@@ -3,6 +3,7 @@ package controllers;
 import db.DBBasket;
 import db.DBCustomer;
 import db.DBHelper;
+import db.DBProduct;
 import models.*;
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
@@ -51,11 +52,10 @@ public class BasketController {
             DBHelper.save(order);
             order.setProductToOrder();
             till.sellBasketToCustomer(customer);
-            DBHelper.save(order);
+//            DBProduct.saveProducts(customersBasket);
             DBHelper.save(customersBasket);
             DBHelper.save(till);
             DBHelper.save(customer);
-
             res.redirect("/account");
             return null;
         }, new VelocityTemplateEngine());

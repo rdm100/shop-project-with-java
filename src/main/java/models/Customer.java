@@ -13,7 +13,6 @@ public class Customer {
     private String name;
     private int age;
     private double wallet;
-    private List<Product> products;
     private Basket basket;
     private List<Order> orders;
 
@@ -27,7 +26,6 @@ public class Customer {
         this.basket = new Basket();
         basket.setCustomer(this);
         this.wallet = wallet;
-        this.products = new ArrayList<>();
         this.orders = new ArrayList<>();
     }
 
@@ -81,22 +79,16 @@ public class Customer {
         this.wallet = wallet;
     }
 
-    @Transient
-    public List<Product> getProducts() {
-        return products;
+    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+    public List<Order> getOrders() {
+        return orders;
     }
 
-    public void setProducts(List<Product> products) {
-        this.products = products;
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 
-    public int countCustomerHasProducts(){
-        return this.products.size();
-    }
-
-    public void addBasketToCustomerProducts(List<Product> products){
-        this.products.addAll(products);
-    }
 
     public boolean customerCanAffordShopping(Basket basket){
     if(getWallet() > basket.giveTotal())
@@ -118,15 +110,8 @@ public class Customer {
     }
 
     public void setBasket(Basket basket) {
-        this.basket = basket;
-    }
-
-    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, cascade=CascadeType.ALL)
-    public List<Order> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
-    }
+        this.basket = basket;}
 }
+
+
+

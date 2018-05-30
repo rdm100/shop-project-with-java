@@ -52,6 +52,7 @@ public class Food extends Product {
         this.calories = calories;
     }
 
+
     public String bestBeforeToString(){
         Date date = bestBefore.getTime();
         SimpleDateFormat formattedTime = new SimpleDateFormat("dd-MM-yyyy");

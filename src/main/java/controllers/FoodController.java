@@ -72,7 +72,6 @@ public class FoodController {
         }, new VelocityTemplateEngine());
 
 
-
         post("/foods/:id/buy", (req, res) -> {
             String strId = req.params("id");
             Integer intId = Integer.parseInt(strId);
@@ -80,6 +79,7 @@ public class FoodController {
             Product product = DBHelper.find(Product.class, intId);
             Customer customer = DBCustomer.findCustomerByUsername(loggedInUser);
             customer.getBasket().addProducttoBasket(product);
+            DBHelper.save(product);
             res.redirect("/basket");
             return null;
         }, new VelocityTemplateEngine());

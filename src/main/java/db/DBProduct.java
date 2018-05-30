@@ -1,5 +1,6 @@
 package db;
 
+import models.Basket;
 import models.Customer;
 import models.Order;
 import models.Product;
@@ -15,7 +16,11 @@ public class DBProduct {
 
     private static Session session;
 
-
+    public static void saveProducts(Basket basket){
+        for(Product product: basket.getProducts()){
+            DBHelper.save(product);
+        }
+    }
 
     public static List<Product> productsFromSearch(String name) {
         session = HibernateUtil.getSessionFactory().openSession();
