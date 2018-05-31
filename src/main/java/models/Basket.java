@@ -37,7 +37,7 @@ public class Basket {
 
 
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "products_in_basket",
             inverseJoinColumns = {@JoinColumn(name = "product_id", updatable = true)},
             joinColumns = {@JoinColumn(name = "basket_id", updatable = true)}
@@ -76,9 +76,28 @@ public class Basket {
 
     }
 
+//    public void removeProductFromBasket(Product product){
+//               this.basket.remove(product);
+////        public void removeProductFromBasket(Product product) {
+////            product.removeBasket(this);
+////            DBHelper.save(product);
+////                   DBHelper.save(this);
+////
+////
+////               basket.clear();
+////                   }
+
     public void removeProductFromBasket(Product product) {
+        List<Product> newBasket = new ArrayList<>();
         product.removeBasket(this);
-        basket.clear();
+        for(Product eachProduct : this.basket){
+            if(eachProduct != product){}
+                newBasket.add(product);
+        }        basket.clear();
+        newBasket.remove(product);
+        product.removeBasket(this);
+                basket.addAll(newBasket);
+        DBHelper.save(basket);
     }
 
 

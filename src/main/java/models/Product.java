@@ -73,7 +73,7 @@ public abstract class Product {
     }
 
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "products")
+    @ManyToMany(mappedBy = "products")
     @LazyCollection(LazyCollectionOption.FALSE)
     public List<Basket> getBaskets() {
         return baskets;
@@ -109,6 +109,7 @@ public abstract class Product {
     }
     public void removeBasket(Basket basket) {
         this.baskets.remove(basket);
+        DBHelper.save(this);
     }
 
     public String productType(){
